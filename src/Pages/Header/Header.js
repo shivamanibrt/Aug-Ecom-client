@@ -8,14 +8,12 @@ import { Link } from 'react-router-dom';
 export const Header = () => {
     const handelOnLogout = () => {
         alert('You clicked logout button')
-    }
+    };
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
             <Container>
-                <Navbar.Brand href="/">
-                    <div className='d-flex justify-content-between align-items-center text-center gap-2'>
-                        <AiOutlineComment size={28} /> ECOM
-                    </div>
+                <Navbar.Brand className='d-flex justify-content-between align-items-center text-center gap-2'>
+                    <Nav.Link as={Link} to="/"><AiOutlineComment size={28} /> ECOM</Nav.Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">

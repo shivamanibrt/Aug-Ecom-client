@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { Button, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { CustomInput } from '../../Component/FormComponent/CustomInput'
 import { toast } from 'react-toastify';
+import { postUser } from '../../AxiosHelper/apiHelper';
 
 export const Register = () => {
     const [form, setForm] = useState({});
+    const [resp, setResp] = useState({});
+
     const handelOnchange = e => {
         const { name, value } = e.target
 
@@ -18,6 +21,12 @@ export const Register = () => {
         try {
             e.preventDefault();
 
+            const { confirmPassword, ...rest } = form;
+            if (confirmPassword !== rest.password) {
+                return alert('Password do not match')
+            }
+            const result = await postUser(rest)
+            setResp(result)
         } catch (error) {
             toast.error(error.message)
         }
@@ -46,6 +55,27 @@ export const Register = () => {
             required: true
         },
         {
+            label: 'Phone',
+            name: 'phone',
+            type: 'string',
+            placeholder: '04********',
+            required: true
+        },
+        {
+            label: 'DOB',
+            name: 'dob',
+            type: 'date',
+            placeholder: '',
+            required: true
+        },
+        {
+            label: 'Address',
+            name: 'address',
+            type: 'string',
+            placeholder: '1 Gorge st Sydney',
+            required: true
+        },
+        {
             label: 'Password',
             name: 'password',
             type: 'password',
@@ -65,20 +95,16 @@ export const Register = () => {
             <Container className='d-flex align-items-center text-secondary justify-content-center p-5' >
                 <Form className='p-5 shadow-lg m-auto login-form'
                     style={{ width: '450px', backgroundColor: 'white' }} onSubmit={handelOnSubmit}>
-                    <h4 className='text-dark fw-bolder mb-3 text-center'>ECOM</h4>
-                    <Form.Text>
-                        Anyone can create admin or user account for expirement purpose.
-                        Once you are registered, you will be redirected to Dashboard automatically.
-                    </Form.Text>
+                    <h4 className='text-dark fw-bolder mb-3 text-center'>Admin Registration</h4>
+                    {
+                        resp.message && (
+                            <Alert variant={resp.status === 'success' ? 'success' : 'danger'} >
+                                {resp.message}
+                            </Alert>
+                        )
+                    }
+
                     <div className='mt-2' >
-                        <Form.Group className="mb-3" controlId='formBasicElement'>
-                            <Form.Label>Account Type</Form.Label>
-                            <Form.Select name='role' onChange={handelOnchange} >
-                                <option value=''>Select user</option>
-                                <option value='admin'>Admin</option>
-                                <option value='user'>User</option>
-                            </Form.Select>
-                        </Form.Group>
                         {
                             inputs.map((item, i) => (
                                 <CustomInput key={i} {...item} onChange={handelOnchange} />
