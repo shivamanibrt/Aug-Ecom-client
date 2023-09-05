@@ -23,10 +23,11 @@ export const Register = () => {
 
             const { confirmPassword, ...rest } = form;
             if (confirmPassword !== rest.password) {
-                return alert('Password do not match')
+                return toast.error('Password do not match')
             }
-            const result = await postUser(rest)
-            setResp(result)
+            const result = await postUser(rest);
+            setResp(result);
+
         } catch (error) {
             toast.error(error.message)
         }
@@ -91,13 +92,13 @@ export const Register = () => {
         }
     ]
     return (
-        <div className='signUp-page'>
+        <div>
             <Container className='d-flex align-items-center text-secondary justify-content-center p-5' >
                 <Form className='p-5 shadow-lg m-auto login-form'
                     style={{ width: '450px', backgroundColor: 'white' }} onSubmit={handelOnSubmit}>
                     <h4 className='text-dark fw-bolder mb-3 text-center'>Admin Registration</h4>
                     {
-                        resp.message && (
+                        resp && resp.message && (
                             <Alert variant={resp.status === 'success' ? 'success' : 'danger'} >
                                 {resp.message}
                             </Alert>

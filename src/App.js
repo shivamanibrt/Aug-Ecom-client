@@ -6,6 +6,7 @@ import { Login } from './Pages/Login/Login';
 import { Register } from './Pages/Admin/Register';
 import { Layout } from './Pages/Layout/Layout';
 import { Home } from './Pages/Home/Home';
+import { EmaiVerification } from './Pages/Admin/EmaiVerification';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
+            <Route path='admin/verify-email' element={<EmaiVerification />} />
           </Routes>
         </Layout>
       </BrowserRouter>
