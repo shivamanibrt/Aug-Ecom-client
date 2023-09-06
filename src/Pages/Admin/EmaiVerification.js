@@ -23,12 +23,11 @@ export const EmaiVerification = () => {
         (async () => {
             const result = await verifyAdminEmail(obj);
             setResponse(result);
-            console.log(result)
             setIsPending(false);
         })();
-    }, []);
 
-    console.log(response)
+    }, [queryParams]);
+
     return (
         <Container>
             {
@@ -39,7 +38,7 @@ export const EmaiVerification = () => {
                     </Card>
                 ) : (
                     response.message && (
-                        <Alert variant={response.status === 'success' ? 'success' : 'danger'} className='m-auto' style={{ width: '20rem' }}>
+                        <Alert variant={response.status === 'success' ? 'success' : 'danger'} className='m-auto text-center' style={{ width: '10rem' }}>
                             {response.message}
                         </Alert>
                     )

@@ -32,7 +32,7 @@ export const verifyAdminEmail = (data) => {
     const option = {
         method: 'patch',
         url: adminUserEp + '/verify-email',
-        data
+        data,
     }
     return apiProcessor(option);
 }
