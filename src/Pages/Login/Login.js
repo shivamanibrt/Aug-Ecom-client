@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { CustomInput } from '../../Component/FormComponent/CustomInput';
 import { Button, Container, Form } from 'react-bootstrap';
+import { loginUserAction } from '../../Redux/User/userAction';
+import { useDispatch } from 'react-redux'
 
 export const Login = () => {
     const [form, setForm] = useState({});
+    const dispatch = useDispatch();
 
     const handelOnChange = e => {
         const { name, value } = e.target;
@@ -14,9 +17,10 @@ export const Login = () => {
     }
     const handelOnSubmit = async (e) => {
         e.preventDefault();
-
+        dispatch(loginUserAction(form))
         console.log(form)
     }
+
     const inputs = [
         {
             label: 'Email',
@@ -40,7 +44,7 @@ export const Login = () => {
                 <Form className='p-5 shadow-lg m-auto login-form'
                     style={{ width: '450px', backgroundColor: 'white' }}
                     onSubmit={handelOnSubmit}>
-                    <h4 className='text-dark fw-bolder mb-3 text-center'>Login</h4>
+                    <h4 className='text-dark fw-bolder mb-3 text-center'>Welcome back !</h4>
                     <div className='mt-2'>
                         {inputs.map((item, i) => (
                             <CustomInput key={i} {...item} onChange={handelOnChange} />
@@ -52,7 +56,7 @@ export const Login = () => {
 
                     <div className='text-center mt-4'>
                         <p>Or Sign Up using</p>
-                        <p className='text-secondary signUp-btn' onClick={"signUpFunciton"}>SIGN UP</p>
+                        <p className='text-secondary signUp-btn' >SIGN UP</p>
                     </div>
                 </Form>
             </Container>
