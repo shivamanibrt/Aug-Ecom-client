@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    user: {},
+    adminUser: {},
 }
 
 const userSlice = createSlice({
@@ -9,7 +9,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setAdminUser: (state, { payload }) => {
-            state.user = payload
+            state.adminUser = payload
         }
     }
 })

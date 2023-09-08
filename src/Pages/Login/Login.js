@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CustomInput } from '../../Component/FormComponent/CustomInput';
 import { Button, Container, Form } from 'react-bootstrap';
 import { loginUserAction } from '../../Redux/User/userAction';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
     const [form, setForm] = useState({});
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { adminUser } = useSelector(state => state.admin);
+
+    useEffect(() => {
+        adminUser._id && navigate('/dashboard')
+    }, [adminUser, navigate])
 
     const handelOnChange = e => {
         const { name, value } = e.target;
@@ -18,7 +25,6 @@ export const Login = () => {
     const handelOnSubmit = async (e) => {
         e.preventDefault();
         dispatch(loginUserAction(form))
-        console.log(form)
     }
 
     const inputs = [

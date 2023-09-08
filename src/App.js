@@ -7,6 +7,8 @@ import { Register } from './Pages/Admin/Register';
 import { Layout } from './Pages/Layout/Layout';
 import { Home } from './Pages/Home/Home';
 import { EmaiVerification } from './Pages/Admin/EmaiVerification';
+import { Dashboard } from './Pages/Dashboard/Dashboard';
+import { PrivatePages } from './PrivatePage/PrivatePages';
 
 function App() {
   return (
@@ -14,6 +16,12 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Routes>
+            {/* Private route */}
+            <Route path='dashboard' element={<PrivatePages >
+              <Dashboard />
+            </PrivatePages>} />
+
+            {/* Public Pages */}
             <Route path='/' element={<Home />} />
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
