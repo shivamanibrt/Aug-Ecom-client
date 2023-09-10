@@ -9,6 +9,8 @@ import { Home } from './Pages/Home/Home';
 import { EmaiVerification } from './Pages/Admin/EmaiVerification';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
 import { PrivatePages } from './PrivatePage/PrivatePages';
+import { Products } from './Pages/Products/Products';
+import { AdminLayout } from './Layout/AdminLayout';
 
 function App() {
   return (
@@ -17,9 +19,11 @@ function App() {
         <Layout>
           <Routes>
             {/* Private route */}
-            <Route path='dashboard' element={<PrivatePages >
-              <Dashboard />
+            <Route path='dashboard' element={<PrivatePages ><Dashboard />
             </PrivatePages>} />
+            <Route path='products' element={<PrivatePages ><Products />
+            </PrivatePages>} />
+            <Route path='products' element={<AdminLayout />} />
 
             {/* Public Pages */}
             <Route path='/' element={<Home />} />

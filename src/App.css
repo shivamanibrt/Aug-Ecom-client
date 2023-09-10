@@ -1,5 +1,10 @@
 .children {
     min-height: 85vh;
+    position: relative;
 }
-.paige-main {
+.email-cerification {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

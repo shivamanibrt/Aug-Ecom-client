@@ -29,12 +29,14 @@ export const EmaiVerification = () => {
     }, [queryParams]);
 
     return (
-        <Container>
+        <Container className='email-cerification'>
             {
                 isPending ? (
                     <Card className='p-3 m-auto' style={{ width: '20rem' }}>
                         <Spinner animation="border" role="status" className='m-auto' />
                         <h5>Email verification process please wait...</h5>
+                        <br />
+                        <p>If the page din't load within 10 seconds please refresh it</p>
                     </Card>
                 ) : (
                     response.message && (
