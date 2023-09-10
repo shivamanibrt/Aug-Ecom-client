@@ -3,9 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { AiOutlineComment } from 'react-icons/ai'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export const Header = () => {
+    const { adminUser } = useSelector((state) => state.admin);
+
     const handelOnLogout = () => {
         alert('You clicked logout button')
     };
@@ -20,8 +23,10 @@ export const Header = () => {
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
+
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                        {adminUser?._id && <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>}
                         <Nav.Link as={Link} to="/register">Register</Nav.Link>
                         <Nav.Link as={Link} to="/register" onClick={handelOnLogout}>Logout</Nav.Link>
                     </Nav>

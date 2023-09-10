@@ -1,7 +1,8 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
 
 export const Dashboard = () => {
     return (
-        <div>Dashboard</div>
+        <Container>Dashboard</Container>
     )
 }
