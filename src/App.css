@@ -11,11 +11,11 @@
 .user-layout {
     display: flex;
     min-height: 90vh;
-    border-bottom: 1px solid #b2b2b2;
+    border-bottom: 1px solid #e3e0e0;
 }
 .left {
     width: 250px;
-    border-right: 1px solid #b2b2b2;
+    border-right: 1px solid #e3e0e0;
     transition: width 0.3s ease;
 }
 .right {

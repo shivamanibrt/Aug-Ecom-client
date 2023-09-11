@@ -14,7 +14,7 @@ export const AdminLayout = ({ children }) => {
         <PrivatePages>
             <div className='user-layout'>
                 <div className='left'>
-                    <h3 className='text-center text-secondary mt-4'>Hi !</h3>
+                    <h5 className='text-center text-secondary mt-4'>Hi Mr Young!</h5>
                     <ul>
                         <li className='nav-item list-unstyled p-2'>
                             <Link to='/dashboard' className='nav-link'>

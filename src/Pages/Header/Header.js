@@ -23,12 +23,20 @@ export const Header = () => {
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
-
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
-                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                        {adminUser?._id && <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>}
-                        <Nav.Link as={Link} to="/register">Register</Nav.Link>
-                        <Nav.Link as={Link} to="/register" onClick={handelOnLogout}>Logout</Nav.Link>
+                        {adminUser?._id ?
+                            (
+                                <>
+                                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                                    <Nav.Link as={Link} to="/register" onClick={handelOnLogout}>Logout</Nav.Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                                    <Nav.Link as={Link} to="/register">Register</Nav.Link>
+                                </>
+                            )
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>
