@@ -1,19 +1,12 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
-import { Products } from '../Products/Products'
+import { AdminLayout } from '../../Layout/AdminLayout'
 
-export const Dashboard = ({ children }) => {
+export const Dashboard = () => {
     return (
-        <Container>
-            <div>
-                <ul>
-                    <li>products</li>
-                </ul>
+        <AdminLayout>
+            <div className='p-4 text-secondary'>
+                <h3 className='dashboard_heading' >Dashboard</h3>
             </div>
-            <main>
-                {children}
-            </main>
-
-        </Container>
+        </AdminLayout>
     )
 }

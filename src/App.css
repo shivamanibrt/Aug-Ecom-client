@@ -8,3 +8,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.user-layout {
+    display: flex;
+    min-height: 90vh;
+    border-bottom: 1px solid #b2b2b2;
+}
+.left {
+    width: 250px;
+    border-right: 1px solid #b2b2b2;
+    transition: width 0.3s ease;
+}
+.right {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
