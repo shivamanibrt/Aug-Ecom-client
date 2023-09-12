@@ -32,8 +32,6 @@ function App() {
             <Route path='reviews' element={<Reviews />} />
             <Route path='settings' element={<Settings />} />
 
-
-
             {/* Public Pages */}
             <Route path='/' element={<Home />} />
             <Route path='login' element={<Login />} />

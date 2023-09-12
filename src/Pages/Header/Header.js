@@ -3,14 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { AiOutlineComment } from 'react-icons/ai'
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { adminLogout } from '../../Redux/User/userAction';
 
 export const Header = () => {
     const { adminUser } = useSelector((state) => state.admin);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handelOnLogout = () => {
-        alert('You clicked logout button')
+        if (window.confirm('Are you sure you want to logout?')) {
+            dispatch(adminLogout());
+        }
+        navigate('/login')
     };
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
@@ -28,7 +34,7 @@ export const Header = () => {
                             (
                                 <>
                                     <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                                    <Nav.Link as={Link} to="/register" onClick={handelOnLogout}>Logout</Nav.Link>
+                                    <Nav.Link as={Link} to="/login" onClick={handelOnLogout}>Logout</Nav.Link>
                                 </>
                             ) : (
                                 <>

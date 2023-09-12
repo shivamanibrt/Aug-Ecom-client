@@ -3,17 +3,20 @@ import { CustomInput } from '../../Component/FormComponent/CustomInput';
 import { Button, Container, Form } from 'react-bootstrap';
 import { loginUserAction } from '../../Redux/User/userAction';
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Login = () => {
     const [form, setForm] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const { adminUser } = useSelector(state => state.admin);
 
+    const origin = (location?.state?.from?.pathname) || '/dashboard';
+
     useEffect(() => {
-        adminUser._id && navigate('/dashboard')
-    }, [adminUser, navigate])
+        adminUser._id && navigate(origin)
+    }, [adminUser, navigate, origin])
 
     const handelOnChange = e => {
         const { name, value } = e.target;
