@@ -12,14 +12,17 @@ export const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handelOnLogout = () => {
+    const handelOnLogout = (e) => {
+        e.preventDefault();
         if (window.confirm('Are you sure you want to logout?')) {
             dispatch(adminLogout());
         }
         navigate('/login')
     };
     return (
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" style={{
+            backgroundColor: '#20262e'
+        }}>
             <Container>
                 <Navbar.Brand className='d-flex justify-content-between align-items-center text-center gap-2'>
                     <Nav.Link as={Link} to="/"><AiOutlineComment size={28} /> ECOM</Nav.Link>

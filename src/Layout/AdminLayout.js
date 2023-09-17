@@ -8,13 +8,16 @@ import { FaUsers } from 'react-icons/fa'
 import { TbTruckDelivery } from 'react-icons/tb'
 import { MdRateReview } from 'react-icons/md'
 import { CiSettings } from 'react-icons/ci'
+import { FaUserCog } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 
 export const AdminLayout = ({ children }) => {
+    const { adminUser } = useSelector((state) => state.admin)
     return (
         <PrivatePages>
             <div className='user-layout'>
                 <div className='left'>
-                    <h5 className='text-center text-secondary mt-4'>Hi Mr Young!</h5>
+                    <h5 className='text-center mt-4' style={{ color: '#FF6000' }}><FaUserCog /> Hi {adminUser.fName} !</h5>
                     <ul>
                         <li className='nav-item list-unstyled p-2'>
                             <Link to='/dashboard' className='nav-link'>

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const rootUrl = process.env.REACT_APP_API_ENDPOINT;
 const adminUserEp = rootUrl + '/admin-user'
+const catagoryEP = rootUrl + '/catagory'
 
 const apiProcessor = async ({ method, url, data }) => {
     try {
@@ -46,3 +47,10 @@ export const loginAdminUser = (data) => {
     return apiProcessor(option);
 }
 
+export const fetchCategory = (_id) => {
+    const option = {
+        method: 'get',
+        url: _id ? catagoryEP + '/' + _id : catagoryEP
+    }
+    return apiProcessor(option);
+}

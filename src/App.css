@@ -1,5 +1,5 @@
 .children {
-    min-height: 80vh;
+    min-height: 85vh;
     position: relative;
 }
 .email-cerification {
@@ -8,18 +8,26 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.header {
+    background-color: #20262e;
+}
 .user-layout {
     display: flex;
     min-height: 85vh;
-    border-bottom: 1px solid #e3e0e0;
 }
 .left {
     width: 250px;
-    border-right: 1px solid #e3e0e0;
     transition: width 0.3s ease;
+    background-color: #20262e;
+    color: #f9f9f9;
 }
 .right {
     width: auto;
     display: flex;
     flex-direction: column;
+    color: #000000;
+}
+.nav-item:hover {
+    background-color: #28323e; /* Change to your desired background color */
+    transition: background-color 0.3s ease; /* Add a smooth transition */
 }
