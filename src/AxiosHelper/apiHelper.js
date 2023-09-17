@@ -54,3 +54,10 @@ export const fetchCategory = (_id) => {
     }
     return apiProcessor(option);
 }
+export const deleteCataegory = (_id) => {
+    const option = {
+        method: 'delete',
+        url: adminUserEp + "/" + catagoryEP
+    }
+    return apiProcessor(option);
+}

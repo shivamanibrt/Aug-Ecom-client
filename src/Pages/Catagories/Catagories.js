@@ -7,12 +7,14 @@ import Container from 'react-bootstrap/Container'
 export const Catagories = () => {
     return (
         <AdminLayout>
-            <div className='p-4 text-secondary'>
-                <h3>Catagories</h3>
-            </div>
-            <Container>
-                <CatgeoryForm />
-                <CatagegoryTable />
+            <Container >
+                <div className='p-4 bold'>
+                    <h3>Catagories</h3>
+                </div>
+                <Container>
+                    <CatgeoryForm />
+                    <CatagegoryTable />
+                </Container>
             </Container>
         </AdminLayout>
     )

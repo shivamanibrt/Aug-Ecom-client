@@ -1,3 +1,7 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
 .children {
     min-height: 85vh;
     position: relative;
@@ -22,10 +26,11 @@
     color: #f9f9f9;
 }
 .right {
-    width: auto;
+    flex: 1;
     display: flex;
     flex-direction: column;
     color: #000000;
+    background-color: #f5f3f3;
 }
 .nav-item:hover {
     background-color: #28323e; /* Change to your desired background color */
