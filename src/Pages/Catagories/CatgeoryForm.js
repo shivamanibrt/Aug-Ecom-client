@@ -31,7 +31,7 @@ export const CatgeoryForm = () => {
             <Row className="g-2 align-items-center">
                 <Col md="2">
                     <Form.Group >
-                        <Form.Check name="status" label="Status" type="switch" onChange={handleOnChange} />
+                        <Form.Check name="status" label="Status" type="switch" style={{ fontSize: '25px' }} onChange={handleOnChange} />
                     </Form.Group>
                 </Col>
                 <Col md="4">
