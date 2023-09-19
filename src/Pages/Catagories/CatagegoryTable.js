@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCatagories } from '../../Redux/Category/PageCatageoryAction';
+import { deleteCategoriesAction, getAllCatagories } from '../../Redux/Category/PageCatageoryAction';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { deleteCataegory } from '../../AxiosHelper/apiHelper';
 
 
 export const CatagegoryTable = () => {
@@ -15,8 +14,11 @@ export const CatagegoryTable = () => {
     }, [dispatch])
 
     const handelOnDelete = (id) => {
-        deleteCataegory(id)
+        dispatch(deleteCategoriesAction(id))
     }
+
+    const parentCats = catageory.filter(({ parentId }) => !parentId);
+    const childCats = catageory.filter(({ parentId }) => parentId)
     return (
         <div>
 
@@ -31,16 +33,28 @@ export const CatagegoryTable = () => {
                 </thead>
                 <tbody>
                     {
-                        catageory.length > 0 &&
-                        catageory.map((item, i) => (
-                            <tr key={item.i}>
-                                <td>{item.status}</td>
-                                <td>{item.name}</td>
-                                <td>{item.parentId ? 'Children' : 'Parent'}</td>
-                                <td>
-                                    <Button variant='warning' onClick={() => handelOnDelete(item._id)}>Delete</Button>
-                                </td>
-                            </tr>
+                        parentCats.length > 0 &&
+                        parentCats.map((item) => (
+                            <>
+                                <tr key={item?._id} >
+                                    <td >{item.status}</td>
+                                    <td>{item.name}</td>
+                                    <td style={{ backgroundColor: '#ECEE81' }}>{item.parentId ? 'Children' : 'Parent'}</td>
+                                    <td>
+                                        <Button variant='warning' onClick={() => handelOnDelete(item._id)}>Delete</Button>
+                                    </td>
+                                </tr>
+                                {childCats.map((cat) => cat.parentId === item._id && (
+                                    <tr key={cat._id}>
+                                        <td>{cat.status}</td>
+                                        <td>{cat.name}</td>
+                                        <td>{cat.parentId ? 'Children' : 'Parent'}</td>
+                                        <td>
+                                            <Button variant='warning' onClick={() => handelOnDelete(cat._id)}>Delete</Button>
+                                        </td>
+                                    </tr>))
+                                }
+                            </>
                         ))
                     }
                 </tbody>

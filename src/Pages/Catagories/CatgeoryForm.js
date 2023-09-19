@@ -3,11 +3,18 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/esm/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { postCategoriesAction } from '../../Redux/Category/PageCatageoryAction';
 
+const initialState = {
+    status: 'inactive',
+    name: '',
+    parentId: null
+}
 export const CatgeoryForm = () => {
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState(initialState);
     const { catageory } = useSelector((state) => state.catageory)
+    const dispatch = useDispatch()
 
     const handleOnChange = (e) => {
         let { checked, name, value } = e.target;
@@ -20,9 +27,10 @@ export const CatgeoryForm = () => {
             [name]: value
         })
     }
+
     const handleOnSubmit = e => {
         e.preventDefault();
-        console.log(form)
+        dispatch(postCategoriesAction(form))
     }
 
     return (
@@ -50,7 +58,7 @@ export const CatgeoryForm = () => {
                 </Col>
                 <Col md="4">
                     <Form.Group>
-                        <Form.Control type="text" placeholder="Enter category name" name='categoryName' style={{ height: '40px' }} onChange={handleOnChange} />
+                        <Form.Control type="text" placeholder="Enter category name" name='name' style={{ height: '40px' }} onChange={handleOnChange} required />
                     </Form.Group>
                 </Col>
                 <Col md="2">
