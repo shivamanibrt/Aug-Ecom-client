@@ -18,7 +18,6 @@ export const CatgeoryForm = () => {
 
     const handleOnChange = (e) => {
         let { checked, name, value } = e.target;
-        console.log(checked);
         if (name === 'status') {
             value = checked ? 'active' : 'inactive';
         }
