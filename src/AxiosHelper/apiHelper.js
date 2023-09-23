@@ -71,3 +71,12 @@ export const postCategory = (data) => {
     }
     return apiProcessor(option);
 }
+
+export const updateCategory = (data) => {
+    const option = {
+        method: 'put',
+        url: catagoryEP,
+        data
+    }
+    return apiProcessor(option);
+}

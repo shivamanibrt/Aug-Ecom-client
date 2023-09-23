@@ -4,8 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/esm/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { postCategoriesAction } from '../../Redux/Category/PageCatageoryAction';
 import { CustomModal } from '../../Component/ShowModal/CustomModal';
+import { updateCategoriesAction } from '../../Redux/Category/PageCatageoryAction';
+import { setShowModal } from '../../Redux/Modal/ModalSlice';
 
 const initialState = {
     status: 'inactive',
@@ -34,8 +35,9 @@ export const EditCategories = ({ selectedCat }) => {
     console.log(form)
     const handleOnSubmit = e => {
         e.preventDefault();
-        const { _v, slug, ...rest } = form
-
+        const { createdAt, updatedAt, __v, slug, ...rest } = form;
+        dispatch(updateCategoriesAction(rest));
+        dispatch(setShowModal(false))
     }
 
     return (

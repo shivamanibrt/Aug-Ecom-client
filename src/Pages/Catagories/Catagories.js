@@ -11,10 +11,8 @@ export const Catagories = () => {
                 <div className='p-4 bold'>
                     <h3>Catagories</h3>
                 </div>
-                <Container>
-                    <CatgeoryForm />
-                    <CatagegoryTable />
-                </Container>
+                <CatgeoryForm />
+                <CatagegoryTable />
             </Container>
         </AdminLayout>
     )
