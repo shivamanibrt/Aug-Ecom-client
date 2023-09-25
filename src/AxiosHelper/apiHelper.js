@@ -4,13 +4,17 @@ const rootUrl = process.env.REACT_APP_API_ENDPOINT;
 const adminUserEp = rootUrl + '/admin-user'
 const catagoryEP = rootUrl + '/catagory'
 
-const apiProcessor = async ({ method, url, data }) => {
+const apiProcessor = async ({ method, url, data, isPrivate }) => {
     try {
+        let headers = isPrivate ? { Authorization: sessionStorage.getItem('accessJWT') } : null;
+
         const response = await axios({
             method,
             url,
             data,
+            headers,
         })
+
         return response.data
     } catch (error) {
         return {
@@ -50,15 +54,18 @@ export const loginAdminUser = (data) => {
 export const fetchCategory = (_id) => {
     const option = {
         method: 'get',
-        url: _id ? catagoryEP + '/' + _id : catagoryEP
+        url: _id ? catagoryEP + '/' + _id : catagoryEP,
+        isPrivate: true
     }
     return apiProcessor(option);
 }
+
 export const deleteCataegory = (data) => {
     const option = {
         method: 'delete',
         url: catagoryEP,
-        data
+        data,
+        isPrivate: true
     }
     return apiProcessor(option);
 }
@@ -67,7 +74,8 @@ export const postCategory = (data) => {
     const option = {
         method: 'post',
         url: catagoryEP,
-        data
+        data,
+        isPrivate: true
     }
     return apiProcessor(option);
 }

@@ -29,7 +29,12 @@ export const CatgeoryForm = () => {
 
     const handleOnSubmit = e => {
         e.preventDefault();
-        dispatch(postCategoriesAction(form))
+        dispatch(postCategoriesAction(form));
+        setForm({
+            ...form,
+            name: ''
+        });
+
     }
 
     return (
@@ -57,7 +62,15 @@ export const CatgeoryForm = () => {
                 </Col>
                 <Col md="4">
                     <Form.Group>
-                        <Form.Control type="text" placeholder="Enter category name" name='name' style={{ height: '40px' }} onChange={handleOnChange} required />
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter category name"
+                            name="name"
+                            value={form.name}
+                            style={{ height: '40px' }}
+                            onChange={handleOnChange}
+                            required
+                        />
                     </Form.Group>
                 </Col>
                 <Col md="2">

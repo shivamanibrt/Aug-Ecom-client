@@ -27,7 +27,8 @@ export const updateCategoriesAction = (data) => async (dispatch) => {
 
 
 export const deleteCategoriesAction = (data) => async (dispatch) => {
-    const { status } = await deleteCataegory();
-    status === 'success' && dispatch(getAllCatagories(data))
+    const { status, message } = await deleteCataegory({ _id: data });
+    toast[status](message)
+    status === 'success' && dispatch(getAllCatagories())
 }
 

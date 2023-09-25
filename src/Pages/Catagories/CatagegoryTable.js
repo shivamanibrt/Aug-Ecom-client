@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCategoriesAction, getAllCatagories } from '../../Redux/Category/PageCatageoryAction';
+import { deleteCategoriesAction, getAllCatagories, updateCategoriesAction } from '../../Redux/Category/PageCatageoryAction';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { setShowModal } from '../../Redux/Modal/ModalSlice';
@@ -17,10 +17,13 @@ export const CatagegoryTable = () => {
 
     const handelOnDelete = (id) => {
         dispatch(deleteCategoriesAction(id));
+
     };
+
     const handelOnEdit = (cat) => {
-        setSelectedCat(cat)
-        dispatch(setShowModal(true))
+        setSelectedCat(cat);
+        updateCategoriesAction(selectedCat);
+        dispatch(setShowModal(true));
     };
 
     const parentCats = catageory.filter(({ parentId }) => !parentId);
