@@ -7,7 +7,6 @@ const catagoryEP = rootUrl + '/catagory'
 const apiProcessor = async ({ method, url, data, isPrivate }) => {
     try {
         let headers = isPrivate ? { Authorization: sessionStorage.getItem('accessJWT') } : null;
-
         const response = await axios({
             method,
             url,
@@ -55,6 +54,14 @@ export const loginAdminUser = (data) => {
         method: 'post',
         url: adminUserEp + '/login',
         data,
+    }
+    return apiProcessor(option);
+}
+export const getAdminUSer = () => {
+    const option = {
+        method: 'get',
+        url: adminUserEp,
+        isPrivate: true
     }
     return apiProcessor(option);
 }
