@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CustomInput } from '../../Component/FormComponent/CustomInput';
 import { Button, Container, Form } from 'react-bootstrap';
-import { loginUserAction } from '../../Redux/User/userAction';
+import { autoLogin, loginUserAction } from '../../Redux/User/userAction';
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -15,8 +15,8 @@ export const Login = () => {
     const origin = (location?.state?.from?.pathname) || '/dashboard';
 
     useEffect(() => {
-        adminUser._id && navigate(origin)
-    }, [adminUser, navigate, origin])
+        adminUser._id ? navigate(origin) : dispatch(autoLogin())
+    }, [adminUser, navigate, origin, dispatch])
 
     const handelOnChange = e => {
         const { name, value } = e.target;

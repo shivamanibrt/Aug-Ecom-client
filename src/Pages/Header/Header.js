@@ -19,6 +19,7 @@ export const Header = () => {
         }
         navigate('/login')
     };
+
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" style={{
             backgroundColor: '#20262e'

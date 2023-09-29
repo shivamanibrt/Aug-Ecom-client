@@ -24,6 +24,14 @@ const apiProcessor = async ({ method, url, data, isPrivate }) => {
     }
 }
 
+export const emailVerifyAdminUser = (data) => {
+    const option = {
+        method: 'get',
+        url: adminUserEp,
+        isPrivate: true
+    }
+    return apiProcessor(option);
+}
 export const postUser = (data) => {
     const option = {
         method: 'post',
@@ -84,7 +92,8 @@ export const updateCategory = (data) => {
     const option = {
         method: 'put',
         url: catagoryEP,
-        data
+        data,
+        isPrivate: true
     }
     return apiProcessor(option);
 }

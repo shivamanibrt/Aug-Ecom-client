@@ -16,8 +16,9 @@ export const CatagegoryTable = () => {
     }, [dispatch]);
 
     const handelOnDelete = (id) => {
-        dispatch(deleteCategoriesAction(id));
-
+        if (window.confirm('Are you sure you want to delete')) {
+            dispatch(deleteCategoriesAction(id));
+        }
     };
 
     const handelOnEdit = (cat) => {
