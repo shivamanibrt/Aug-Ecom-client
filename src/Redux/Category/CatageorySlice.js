@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const userSlice = createSlice({
-    name: 'adminUser',
+    name: 'category',
     initialState,
     reducers: {
         setCatageory: (state, { payload }) => {

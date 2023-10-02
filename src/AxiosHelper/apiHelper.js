@@ -4,9 +4,9 @@ const rootUrl = process.env.REACT_APP_API_ENDPOINT;
 const adminUserEp = rootUrl + '/admin-user'
 const catagoryEP = rootUrl + '/catagory'
 
-const apiProcessor = async ({ method, url, data, isPrivate }) => {
+const apiProcessor = async ({ method, url, data, isPrivate, token }) => {
     try {
-        let headers = isPrivate ? { Authorization: sessionStorage.getItem('accessJWT') } : null;
+        let headers = isPrivate ? { Authorization: token || sessionStorage.getItem('accessJWT') } : null;
         const response = await axios({
             method,
             url,
@@ -57,13 +57,29 @@ export const loginAdminUser = (data) => {
     }
     return apiProcessor(option);
 }
-export const getAdminUSer = () => {
+
+export const getAdminUSer = (token) => {
     const option = {
         method: 'get',
         url: adminUserEp,
-        isPrivate: true
+        isPrivate: true,
+        token
     }
     return apiProcessor(option);
+}
+
+//fetch new accessJWT
+export const getNewAccessJWT = async () => {
+    const option = {
+        method: 'get',
+        url: adminUserEp + "/accessjwt",
+        isPrivate: true,
+        token: localStorage.getItem('refreshJWT')
+    };
+    const { status, accessJWT } = await apiProcessor(option);
+    console.log(accessJWT)
+    status === 'success' && sessionStorage.setItems('accessJWT', accessJWT)
+    return accessJWT
 }
 
 export const fetchCategory = (_id) => {

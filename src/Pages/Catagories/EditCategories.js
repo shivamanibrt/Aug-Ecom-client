@@ -32,7 +32,7 @@ export const EditCategories = ({ selectedCat }) => {
             [name]: value
         })
     }
-    console.log(form)
+
     const handleOnSubmit = e => {
         e.preventDefault();
         const { createdAt, updatedAt, __v, slug, ...rest } = form;
