@@ -16,7 +16,7 @@ export const Login = () => {
 
     useEffect(() => {
         adminUser._id ? navigate(origin) : dispatch(autoLogin())
-    }, [navigate, origin, dispatch])
+    }, [navigate, origin, dispatch, adminUser._id])
 
     const handelOnChange = e => {
         const { name, value } = e.target;
@@ -28,8 +28,7 @@ export const Login = () => {
     const handelOnSubmit = async (e) => {
         e.preventDefault();
         dispatch(loginUserAction(form))
-
-    }
+    };
 
     const inputs = [
         {

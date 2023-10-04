@@ -77,7 +77,6 @@ export const getNewAccessJWT = async () => {
         token: localStorage.getItem('refreshJWT')
     };
     const { status, accessJWT } = await apiProcessor(option);
-    console.log(accessJWT)
     status === 'success' && sessionStorage.setItems('accessJWT', accessJWT)
     return accessJWT
 }
