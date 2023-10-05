@@ -16,10 +16,27 @@ const apiProcessor = async ({ method, url, data, isPrivate, token }) => {
 
         return response.data
     } catch (error) {
-        return {
-            status: 'error',
-            message: error.message
+        let message = error.message;
+        if (error.response && error.response.status === 401) {
+            sessionStorage.removeItem('accessJWT')
+            localStorage.removeItem('refreshJWT')
         }
+        if (error.response && error.response.data) {
+            message = error.response.data.message;
+        }
+
+        if (message === 'jwt expired') {
+            // call the api to get new accessJWT and store in the session and recall the api processor
+            const accessJWT = await getNewAccessJWT()
+            if (accessJWT) {
+                return apiProcessor({ method, url, data, isPrivate, token })
+            }
+        }
+        if (error.resonse)
+            return {
+                status: 'error',
+                message
+            }
     }
 }
 
