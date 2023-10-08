@@ -10,7 +10,7 @@ import { EmaiVerification } from './Pages/Admin/EmaiVerification';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
 import { Products } from './Pages/Products/Products';
 import { Catagories } from './Pages/Catagories/Catagories';
-import { PaymentMethods } from './Layout/PaymentMethods/PaymentMethods';
+import { PaymentMethods } from './Pages/PaymentMethods/PaymentMethods';
 import { Users } from './Pages/Users/Users';
 import { Orders } from './Pages/Orders/Orders';
 import { Reviews } from './Pages/Reviews/Reviews';

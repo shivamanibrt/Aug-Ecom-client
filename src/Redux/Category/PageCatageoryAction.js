@@ -10,7 +10,6 @@ export const getAllCatagories = () => async (dispatch) => {
 export const postCategoriesAction = (data) => async (dispatch) => {
     const promisePending = postCategory(data);
     toast.promise(promisePending, { pending: 'Please wait...' })
-
     const { status, message } = await promisePending;
     toast[status](message)
     status === 'success' && dispatch(getAllCatagories());

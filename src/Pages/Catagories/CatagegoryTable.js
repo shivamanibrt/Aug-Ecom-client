@@ -43,32 +43,35 @@ export const CatagegoryTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {parentCats.length > 0 &&
-                        parentCats.map((item) => (
-                            <React.Fragment key={item?._id}>
-                                <tr className='bg-info'>
-                                    <td className={item?.status === 'active' ? 'text-success' : 'text-danger'}>{item.status}</td>
-                                    <td>{item.name}</td>
-                                    <td style={{ backgroundColor: '#96B6C5' }}>{item.parentId ? 'Children' : 'Parent'}</td>
+                    {parentCats.map((item) => (
+                        <>
+                            {/* Render Parent Category */}
+                            <tr className='bg-info'>
+                                <td className={item?.status === 'active' ? 'text-success' : 'text-danger'}>{item?.status}</td>
+                                <td>{item.name}</td>
+                                <td style={{ backgroundColor: '#96B6C5' }}>{item.parentId ? 'Children' : 'Parent'}</td>
+                                <td className='d-flex gap-2 justify-content-center'>
+                                    <Button variant='warning' onClick={() => handelOnDelete(item._id)}>Delete</Button>
+                                    <Button variant='primary' onClick={() => handelOnEdit(item)}>Edit</Button>
+                                </td>
+                            </tr>
+
+                            {/* Render Child Categories */}
+                            {childCats.map((cat) => cat.parentId === item._id && (
+                                <tr key={cat._id}>
+                                    <td className={cat?.status === 'active' ? 'text-success' : 'text-danger'}>{cat?.status}</td>
+                                    <td>{cat.name}</td>
+                                    <td>{cat.parentId ? 'Children' : 'Parent'}</td>
                                     <td className='d-flex gap-2 justify-content-center'>
-                                        <Button variant='warning' onClick={() => handelOnDelete(item._id)}>Delete</Button>
-                                        <Button variant='primary' onClick={() => handelOnEdit(item)}>Edit</Button>
+                                        <Button variant='warning' onClick={() => handelOnDelete(cat._id)}>Delete</Button>
+                                        <Button variant='primary' onClick={() => handelOnEdit(cat)}>Edit</Button>
                                     </td>
                                 </tr>
-                                {childCats.map((cat) => cat.parentId === item._id && (
-                                    <tr key={cat._id}>
-                                        <td className={cat.status === 'active' ? 'text-success' : 'text-danger'}>{cat.status}</td>
-                                        <td>{cat.name}</td>
-                                        <td>{cat.parentId ? 'Children' : 'Parent'}</td>
-                                        <td className='d-flex gap-2 justify-content-center'>
-                                            <Button variant='warning' onClick={() => handelOnDelete(cat._id)}>Delete</Button>
-                                            <Button variant='primary' onClick={() => handelOnEdit(cat)}>Edit</Button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </React.Fragment>
-                        ))}
+                            ))}
+                        </>
+                    ))}
                 </tbody>
+
             </Table>
         </div>
     );

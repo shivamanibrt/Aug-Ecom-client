@@ -3,6 +3,7 @@ import axios from 'axios'
 const rootUrl = process.env.REACT_APP_API_ENDPOINT;
 const adminUserEp = rootUrl + '/admin-user'
 const catagoryEP = rootUrl + '/catagory'
+const PMEP = rootUrl + '/paymentMethod'
 
 const apiProcessor = async ({ method, url, data, isPrivate, token }) => {
     try {
@@ -135,4 +136,13 @@ export const updateCategory = (data) => {
         isPrivate: true
     }
     return apiProcessor(option);
+}
+
+export const fetchPaymentMethod = () => {
+    const option = {
+        method: 'get',
+        url: PMEP,
+        isPrivate: true,
+    };
+    return apiProcessor(option)
 }
