@@ -146,3 +146,21 @@ export const fetchPaymentMethod = () => {
     };
     return apiProcessor(option)
 }
+export const postPaymentMethod = (data) => {
+    const option = {
+        method: 'post',
+        url: PMEP,
+        data,
+        isPrivate: true,
+    };
+    return apiProcessor(option)
+}
+export const deletePaymentMethod = (data) => {
+    const option = {
+        method: 'delete',
+        url: PMEP,
+        data,
+        isPrivate: true,
+    };
+    return apiProcessor(option)
+}

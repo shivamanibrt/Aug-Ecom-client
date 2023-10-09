@@ -1,18 +1,35 @@
 import React, { useState } from 'react'
-import { Button, Col, Form, Row } from 'react-bootstrap'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { Button, Form } from 'react-bootstrap'
 import { CustomInput } from '../../Component/FormComponent/CustomInput'
+import { CustomModal } from '../../Component/ShowModal/CustomModal'
+import { useDispatch } from 'react-redux'
+import { postPaymentAction } from '../../Redux/PaymentMethod/paymentMethodAction'
+import { setShowModal } from '../../Redux/Modal/ModalSlice'
+const initialState = {
+    status: "",
+    name: "",
+    description: "",
+}
 
 export const PaymentMethodForm = () => {
-    const [form, setForm] = useState({})
+    const dispatch = useDispatch()
+    const [form, setForm] = useState(initialState)
 
-    const handelOnChangePaymentMethod = (e) => {
-        const { name, value } = e.targert;
+    const handelOnChange = (e) => {
+        let { checked, name, value } = e.target;
 
+        if (name === 'status') {
+            value = checked ? 'active' : 'inactive'
+        }
+        setForm({
+            ...form,
+            [name]: value
+        })
     }
 
-    const handelOnAddPaymentMethod = () => {
-        alert('Clicked')
+    const handelOnSubmit = (e) => {
+        e.preventDefault();
+        dispatch(postPaymentAction(form)) && dispatch(setShowModal(false))
     }
 
     const inputFields = [
@@ -28,28 +45,29 @@ export const PaymentMethodForm = () => {
             label: 'Description',
             type: 'text',
             as: 'textarea',
-            placeholder: 'Write information about the payment method'
+            placeholder: 'Write information about the payment method',
+            style: {
+                width: '300px',
+                height: '100px',
+            },
+            required: true,
         }
     ]
+
     return (
-        <div className="d-flex justify-content-end p-4">
-            <Row className="g-2 align-items-center">
-                <Col md="2">
-                    <Form.Group>
-                        <Form.Check type='switch' name='status' label='status' />
-                    </Form.Group>
-                </Col>
-                <Col md="6">
-                    {
-                        inputFields.map((item) => <CustomInput {...item} />)
-                    }
-                </Col>
-                <Col md="2">
-                    <Button className="d-flex align-items-center" onClick={handelOnAddPaymentMethod}>
-                        <AiOutlinePlus /> Add Payment Method
-                    </Button>
-                </Col>
-            </Row>
-        </div>
+        <CustomModal heading='Add new payment method'>
+            <Form className=" p-1" onSubmit={handelOnSubmit}>
+                <Form.Group>
+                    <Form.Check type='switch' name='status' label='status' onChange={handelOnChange} />
+                </Form.Group>
+                {
+                    inputFields.map((item, i) => <CustomInput key={i}{...item} onChange={handelOnChange} />)
+                }
+                <Button className="d-flex align-items-center" variant='success' onClick={handelOnSubmit}>
+                    Add Payment Method
+                </Button>
+            </Form>
+        </CustomModal>
+
     )
 }

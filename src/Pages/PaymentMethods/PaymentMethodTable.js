@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPaymentMethod } from '../../Redux/PaymentMethod/paymentMethodAction'
+import { getPaymentAction } from '../../Redux/PaymentMethod/paymentMethodAction'
 
 export const PaymentMethodTable = () => {
     const dispatch = useDispatch()
     const { paymentMethods } = useSelector((state) => state.paymentMethod)
 
     useEffect(() => {
-        dispatch(getPaymentMethod())
+        dispatch(getPaymentAction())
     }, [dispatch]);
+
+    const handelOnDelete = () => {
+        alert('delete')
+    }
 
     return (
         <div>
@@ -31,7 +35,7 @@ export const PaymentMethodTable = () => {
                                 <td>{item.name}</td>
                                 <td>
                                     <Button variant='warning'>Edit</Button>{" "}
-                                    <Button variant='danger'>Delete</Button>
+                                    <Button variant='danger' onClick={handelOnDelete}>Delete</Button>
                                 </td>
                             </tr>
                         ))
