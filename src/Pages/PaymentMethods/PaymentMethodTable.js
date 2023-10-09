@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPaymentAction } from '../../Redux/PaymentMethod/paymentMethodAction'
+import { deletePaymentAction, getPaymentAction } from '../../Redux/PaymentMethod/paymentMethodAction'
 
 export const PaymentMethodTable = () => {
     const dispatch = useDispatch()
@@ -11,8 +11,10 @@ export const PaymentMethodTable = () => {
         dispatch(getPaymentAction())
     }, [dispatch]);
 
-    const handelOnDelete = () => {
-        alert('delete')
+    const handelOnDelete = (_id) => {
+        if (window.confirm('Are you sure you want to delete this item')) {
+            dispatch(deletePaymentAction(_id))
+        }
     }
 
     return (
@@ -33,9 +35,9 @@ export const PaymentMethodTable = () => {
                                 <td>{i + 1}</td>
                                 <td>{item.status}</td>
                                 <td>{item.name}</td>
-                                <td>
-                                    <Button variant='warning'>Edit</Button>{" "}
-                                    <Button variant='danger' onClick={handelOnDelete}>Delete</Button>
+                                <td className='d-flex justify-content-between'>
+                                    <Button variant='warning'>Edit</Button>
+                                    <Button variant='danger' onClick={() => handelOnDelete(item._id)}>Delete</Button>
                                 </td>
                             </tr>
                         ))
