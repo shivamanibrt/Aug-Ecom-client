@@ -31,3 +31,4 @@ export const deletePaymentAction = (_id) => async dispatch => {
         toast.error(error)
     }
 }
+
