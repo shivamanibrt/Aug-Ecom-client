@@ -22,11 +22,11 @@ export const PaymentMethods = () => {
             </div>
             <Container>
                 <div className='d-flex justify-content-end p-2'>
-                    <Button className="d-flex align-items-center" onClick={() => handelOnClick}>
+                    <Button className="d-flex align-items-center" onClick={() => handelOnClick("add")}>
                         <AiOutlinePlus /> Add Payment Method
                     </Button>
                 </div>
-                <PaymentMethodTable showForm={showForm} handelOnClick={() => handelOnClick} />
+                <PaymentMethodTable showForm={showForm} handelOnClick={handelOnClick} />
             </Container>
         </AdminLayout>
     );
