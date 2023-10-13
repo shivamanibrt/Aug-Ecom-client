@@ -166,3 +166,12 @@ export const deletePaymentMethod = (data) => {
     };
     return apiProcessor(option)
 }
+export const updatePaymentMethod = (data) => {
+    const option = {
+        method: 'put',
+        url: PMEP,
+        data,
+        isPrivate: true,
+    };
+    return apiProcessor(option)
+}

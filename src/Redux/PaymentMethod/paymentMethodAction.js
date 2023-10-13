@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { deletePaymentMethod, fetchPaymentMethod, postPaymentMethod } from '../../AxiosHelper/apiHelper'
+import { deletePaymentMethod, fetchPaymentMethod, postPaymentMethod, updatePaymentMethod } from '../../AxiosHelper/apiHelper'
 import { setPaymentMethods } from './paymentMethodSlice';
 
 export const getPaymentAction = () => async dispatch => {
@@ -24,7 +24,6 @@ export const postPaymentAction = (data) => async (dispatch) => {
 export const deletePaymentAction = (_id) => async dispatch => {
     try {
         const { status, message } = await deletePaymentMethod(_id)
-        console.log(status + ":", message)
         toast[status](message);
         status === 'success' && dispatch(getPaymentAction())
     } catch (error) {
@@ -32,3 +31,12 @@ export const deletePaymentAction = (_id) => async dispatch => {
     }
 }
 
+export const updatePaymentAction = (data) => async dispatch => {
+    try {
+        const { status, message } = await updatePaymentMethod(data);
+        toast[status](message);
+        status === 'success' && dispatch(getPaymentAction())
+    } catch (error) {
+        toast.error(error)
+    }
+}

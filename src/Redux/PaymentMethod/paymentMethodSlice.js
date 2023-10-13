@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    paymentMethods: []
+    paymentMethods: [],
+    selectPM: {}
 };
 
 const paymentMethodSlice = createSlice({
@@ -11,9 +12,12 @@ const paymentMethodSlice = createSlice({
         setPaymentMethods: (state, action) => {
             state.paymentMethods = action.payload
         },
+        setSelectedPm: (state, action) => {
+            state.selectPM = action.payload
+        },
     }
 })
 
 const { reducer, actions } = paymentMethodSlice;
-export const { setPaymentMethods } = actions;
+export const { setPaymentMethods, setSelectedPm } = actions;
 export default reducer;
