@@ -10,7 +10,6 @@ export const PaymentMethodTable = ({ showForm, handelOnClick }) => {
     const dispatch = useDispatch()
     const { paymentMethods } = useSelector((state) => state.paymentMethod)
 
-
     useEffect(() => {
         dispatch(getPaymentAction())
     }, [dispatch]);

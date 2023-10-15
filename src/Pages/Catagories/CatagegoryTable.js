@@ -9,7 +9,7 @@ import { EditCategories } from './EditCategories';
 export const CatagegoryTable = () => {
     const [selectedCat, setSelectedCat] = useState({})
     const dispatch = useDispatch();
-    const { catageory } = useSelector((state) => state.catageory);
+    const { category } = useSelector((state) => state.catageory);
 
     useEffect(() => {
         dispatch(getAllCatagories());
@@ -27,8 +27,8 @@ export const CatagegoryTable = () => {
         dispatch(setShowModal(true));
     };
 
-    const parentCats = catageory.filter(({ parentId }) => !parentId);
-    const childCats = catageory.filter(({ parentId }) => parentId);
+    const parentCats = category.filter(({ parentId }) => !parentId);
+    const childCats = category.filter(({ parentId }) => parentId);
 
     return (
         <div>
