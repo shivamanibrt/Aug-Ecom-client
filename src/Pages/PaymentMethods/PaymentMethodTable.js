@@ -49,7 +49,7 @@ export const PaymentMethodTable = ({ showForm, handelOnClick }) => {
                                 <td>{i + 1}</td>
                                 <td>{item.status}</td>
                                 <td>{item.name}</td>
-                                <td className='d-flex justify-content-between'>
+                                <td className='d-flex justify-content-evenly'>
                                     <Button variant='warning' onClick={() => handelOnEdit(item)}>Edit</Button>
                                     <Button variant='danger' onClick={() => handelOnDelete(item._id)}>Delete</Button>
                                 </td>

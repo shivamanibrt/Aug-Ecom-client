@@ -15,6 +15,7 @@ import { Users } from './Pages/Users/Users';
 import { Orders } from './Pages/Orders/Orders';
 import { Reviews } from './Pages/Reviews/Reviews';
 import { Settings } from './Pages/Settings/Settings';
+import { NewProduct } from './Pages/Products/NewProduct';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
             <Route path='admin/verify-email' element={<EmaiVerification />} />
+            <Route path='newProduct' element={<NewProduct />} />
           </Routes>
         </Layout>
       </BrowserRouter>

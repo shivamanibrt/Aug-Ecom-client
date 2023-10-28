@@ -4,6 +4,7 @@ const rootUrl = process.env.REACT_APP_API_ENDPOINT;
 const adminUserEp = rootUrl + '/admin-user'
 const catagoryEP = rootUrl + '/catagory'
 const PMEP = rootUrl + '/paymentMethod'
+const PEP = rootUrl + '/product'
 
 const apiProcessor = async ({ method, url, data, isPrivate, token }) => {
     try {
@@ -173,5 +174,13 @@ export const updatePaymentMethod = (data) => {
         data,
         isPrivate: true,
     };
+    return apiProcessor(option)
+}
+export const fetchProducts = () => {
+    const option = {
+        method: 'get',
+        url: PEP,
+        isPrivate: true,
+    }
     return apiProcessor(option)
 }
