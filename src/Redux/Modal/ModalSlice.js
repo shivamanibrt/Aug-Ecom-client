@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    showModal: false
+    showModal: false,
+    productModal: false
 }
 
 const modalSlice = createSlice({
@@ -10,10 +11,13 @@ const modalSlice = createSlice({
     reducers: {
         setShowModal: (state) => {
             state.showModal = !state.showModal
+        },
+        setProductModal: (state) => {
+            state.productModal = !state.productModal
         }
     }
 })
 
 const { reducer, actions } = modalSlice
-export const { setShowModal } = actions;
+export const { setShowModal, setProductModal } = actions;
 export default reducer
