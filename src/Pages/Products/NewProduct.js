@@ -5,14 +5,21 @@ import { Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
 import { CustomInput } from '../../Component/FormComponent/CustomInput'
+import { useSelector } from 'react-redux'
 
 
 export const NewProduct = () => {
     const navigate = useNavigate();
+    const { catageory } = useSelector((state) => state.catageory);
 
     const handelOnClick = () => {
         navigate('/products')
     }
+
+    const handelOnChange = () => {
+
+    }
+
     const inputField = [
         {
             name: 'name',
@@ -71,7 +78,7 @@ export const NewProduct = () => {
     return (
         <AdminLayout>
             <div className="p-2 align-items-center">
-                <div onClick={handelOnClick}><BiArrowBack />Back</div>
+                <div><BiArrowBack onClick={handelOnClick} />Back</div>
                 <h1>Add New Product</h1>
             </div>
             <hr />
@@ -82,7 +89,16 @@ export const NewProduct = () => {
                         <Form.Check name='status' type='switch' label='status' />
 
                     </Form.Group>
-
+                    <Form.Select name='parentId' onChange={handelOnChange}>
+                        <option value="">Select Parent Category</option>
+                        {catageory.length > 0 &&
+                            catageory.map((item, i) => (
+                                item.parentId &&
+                                (
+                                    <option value={item._id}>{item.name}</option>)
+                            ))
+                        }
+                    </Form.Select>
                     <Form.Group>
 
                     </Form.Group>

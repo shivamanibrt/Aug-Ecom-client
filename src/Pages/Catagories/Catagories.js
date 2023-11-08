@@ -12,7 +12,7 @@ export const Catagories = () => {
                     <h3>Catagories</h3>
                 </div>
                 <CatgeoryForm />
-                {/* <CatagegoryTable /> */}
+                <CatagegoryTable />
             </Container>
         </AdminLayout>
     )

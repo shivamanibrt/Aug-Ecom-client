@@ -9,7 +9,7 @@ import { EditCategories } from './EditCategories';
 export const CatagegoryTable = () => {
     const [selectedCat, setSelectedCat] = useState({})
     const dispatch = useDispatch();
-    const { category } = useSelector((state) => state.catageory);
+    const { catageory } = useSelector((state) => state.catageory);
 
     useEffect(() => {
         dispatch(getAllCatagories());
@@ -27,8 +27,8 @@ export const CatagegoryTable = () => {
         dispatch(setShowModal(true));
     };
 
-    const parentCats = category.filter(({ parentId }) => !parentId);
-    const childCats = category.filter(({ parentId }) => parentId);
+    const parentCats = catageory.filter(({ parentId }) => !parentId);
+    const childCats = catageory.filter(({ parentId }) => parentId);
 
     return (
         <div>
@@ -44,35 +44,35 @@ export const CatagegoryTable = () => {
                 </thead>
                 <tbody>
                     {parentCats.map((item) => (
-                        <>
-                            {/* Render Parent Category */}
-                            <tr className='bg-info'>
-                                <td className={item?.status === 'active' ? 'text-success' : 'text-danger'}>{item?.status}</td>
-                                <td>{item.name}</td>
-                                <td style={{ backgroundColor: '#96B6C5' }}>{item.parentId ? 'Children' : 'Parent'}</td>
-                                <td className='d-flex gap-2 justify-content-center'>
-                                    <Button variant='warning' onClick={() => handelOnDelete(item._id)}>Delete</Button>
-                                    <Button variant='primary' onClick={() => handelOnEdit(item)}>Edit</Button>
-                                </td>
-                            </tr>
-
-                            {/* Render Child Categories */}
-                            {childCats.map((cat) => cat.parentId === item._id && (
-                                <tr key={cat._id}>
-                                    <td className={cat?.status === 'active' ? 'text-success' : 'text-danger'}>{cat?.status}</td>
-                                    <td>{cat.name}</td>
-                                    <td>{cat.parentId ? 'Children' : 'Parent'}</td>
-                                    <td className='d-flex gap-2 justify-content-center'>
-                                        <Button variant='warning' onClick={() => handelOnDelete(cat._id)}>Delete</Button>
-                                        <Button variant='primary' onClick={() => handelOnEdit(cat)}>Edit</Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </>
+                        <tr key={item._id} className='bg-info'>
+                            <td className={item?.status === 'active' ? 'text-success' : 'text-danger'}>
+                                {item?.status}
+                            </td>
+                            <td>{item.name}</td>
+                            <td style={{ backgroundColor: '#96B6C5' }}>{item.parentId ? 'Children' : 'Parent'}</td>
+                            <td className='d-flex gap-2 justify-content-center'>
+                                <Button variant='warning' onClick={() => handelOnDelete(item._id)}>Delete</Button>
+                                <Button variant='primary' onClick={() => handelOnEdit(item)}>Edit</Button>
+                            </td>
+                        </tr>
+                    ))}
+                    {childCats.map((cat) => cat.parentId && (
+                        <tr key={cat._id}>
+                            <td className={cat && cat.status === 'active' ? 'text-success' : 'text-danger'}>
+                                {cat && cat.status}
+                            </td>
+                            <td>{cat && cat.name}</td>
+                            <td>{cat && cat.parentId ? 'Children' : 'Parent'}</td>
+                            <td className='d-flex gap-2 justify-content-center'>
+                                <Button variant='warning' onClick={() => handelOnDelete(cat._id)}>Delete</Button>
+                                <Button variant='primary' onClick={() => handelOnEdit(cat)}>Edit</Button>
+                            </td>
+                        </tr>
                     ))}
                 </tbody>
-
             </Table>
         </div>
     );
+
+
 };

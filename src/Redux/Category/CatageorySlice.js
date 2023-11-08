@@ -4,16 +4,16 @@ const initialState = {
     catageory: [],
 }
 
-const userSlice = createSlice({
+const categorySlice = createSlice({
     name: 'category',
     initialState,
     reducers: {
-        setCatageory: (state, { payload }) => {
-            state.catageory = payload
+        setCatageory: (state, action) => {
+            state.catageory = action.payload
         }
     }
 })
 
-const { reducer, actions } = userSlice;
+const { reducer, actions } = categorySlice;
 export const { setCatageory } = actions;
 export default reducer;
