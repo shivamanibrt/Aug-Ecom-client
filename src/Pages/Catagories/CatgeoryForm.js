@@ -48,7 +48,7 @@ export const CatgeoryForm = () => {
                 </Col>
                 <Col md="4">
                     <Form.Group>
-                        <Form.Select name="parentId" onChange={handleOnChange}>
+                        <Form.Select name="parentId" onChange={handleOnChange} required>
                             <option value="">Select Parent Category</option>
                             {catageory.length > 0 &&
                                 catageory.map((item, i) => !item.parentId &&

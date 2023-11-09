@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AdminLayout } from '../../Layout/AdminLayout'
 import { Container } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
@@ -7,8 +7,21 @@ import { BiArrowBack } from 'react-icons/bi'
 import { CustomInput } from '../../Component/FormComponent/CustomInput'
 import { useSelector } from 'react-redux'
 
+const initialState = {
+    status: 'inactive',
+    name: '',
+    catId: null,
+    sku: '',
+    qty: '',
+    price: 0,
+    salesPrice: null,
+    salesStartDate: null,
+    salesEndDate: null,
+    description: ''
+}
 
 export const NewProduct = () => {
+    const [form, setForm] = useState(initialState);
     const navigate = useNavigate();
     const { catageory } = useSelector((state) => state.catageory);
 
@@ -23,6 +36,7 @@ export const NewProduct = () => {
     const inputField = [
         {
             name: 'name',
+            value: form.name,
             label: 'Name',
             type: 'text',
             placeholder: 'Product Name',
@@ -30,6 +44,7 @@ export const NewProduct = () => {
         },
         {
             name: 'sku',
+            value: form.sku,
             label: 'SKU',
             type: 'text',
             placeholder: 'Product Unique Code',
@@ -37,30 +52,35 @@ export const NewProduct = () => {
         },
         {
             name: 'price',
+            value: form.price,
             label: 'Price',
             type: 'number',
             placeholder: '343',
         },
         {
             name: 'qty',
+            value: form.qty,
             label: 'Qty',
             type: 'number',
             placeholder: '50',
         },
         {
             name: 'salesStartDate',
-            label: 'Sale Start Date',
+            value: form.salesStartDate,
+            label: 'Sales Start Date',
             type: 'date',
             placeholder: '100',
         },
         {
             name: 'SalesEndDate',
+            value: form.salesEndDate,
             label: 'sales End Date',
             type: 'date',
             placeholder: '100',
         },
         {
             name: 'description',
+            value: form.description,
             label: 'Description',
             type: 'text',
             as: 'textarea',
@@ -84,12 +104,12 @@ export const NewProduct = () => {
             <hr />
             <Container>
 
-                <Form className='p-2 shadow-lg product-card' >
+                <Form className='p-2 shadow-lg product-card mb-2' >
                     <Form.Group className='mb-2'>
                         <Form.Check name='status' type='switch' label='status' />
 
                     </Form.Group>
-                    <Form.Select name='parentId' onChange={handelOnChange}>
+                    <Form.Select name='catId' onChange={handelOnChange}>
                         <option value="">Select Parent Category</option>
                         {catageory.length > 0 &&
                             catageory.map((item, i) => (
