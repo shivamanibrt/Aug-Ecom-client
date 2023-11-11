@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AdminLayout } from '../../Layout/AdminLayout'
 import { Container } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
 import { CustomInput } from '../../Component/FormComponent/CustomInput'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllCatagories } from '../../Redux/Category/PageCatageoryAction'
 
 const initialState = {
     status: 'inactive',
@@ -23,7 +24,12 @@ const initialState = {
 export const NewProduct = () => {
     const [form, setForm] = useState(initialState);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { catageory } = useSelector((state) => state.catageory);
+
+    useEffect(() => {
+        !catageory.length && dispatch(getAllCatagories());
+    }, [dispatch, catageory]);
 
     const handelOnClick = () => {
         navigate('/products')
