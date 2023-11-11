@@ -11,6 +11,7 @@ const initialState = {
     name: '',
     parentId: null
 }
+
 export const CatgeoryForm = () => {
     const [form, setForm] = useState(initialState);
     const { catageory } = useSelector((state) => state.catageory)

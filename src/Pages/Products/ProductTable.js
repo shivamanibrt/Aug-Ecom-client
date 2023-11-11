@@ -3,14 +3,20 @@ import { Button, Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsAction } from '../../Redux/Products/productAction';
+import { getAllCatagories } from '../../Redux/Category/PageCatageoryAction';
 
 
 export const ProductTable = () => {
     const dispatch = useDispatch();
+    const { catageory } = useSelector((state) => state.catageory);
 
     useEffect(() => {
         dispatch(getProductsAction())
     }, [dispatch])
+
+    useEffect(() => {
+        !catageory.length && dispatch(getAllCatagories());
+    }, [dispatch]);
 
     const { productList } = useSelector(state => state.products)
 
