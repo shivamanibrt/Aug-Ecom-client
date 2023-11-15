@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { AdminLayout } from '../../Layout/AdminLayout'
-import { Container } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
 import { CustomInput } from '../../Component/FormComponent/CustomInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCatagories } from '../../Redux/Category/PageCatageoryAction'
+import { postProductsAction } from '../../Redux/Products/productAction'
 
 const initialState = {
     status: 'inactive',
@@ -15,14 +16,15 @@ const initialState = {
     sku: '',
     qty: '',
     price: 0,
+    salesEndDate: null,
     salesPrice: null,
     salesStartDate: null,
-    salesEndDate: null,
     description: '',
 }
 
 export const NewProduct = () => {
     const [form, setForm] = useState(initialState);
+    const [images, setImages] = useState([])
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { catageory } = useSelector((state) => state.catageory);
@@ -35,8 +37,37 @@ export const NewProduct = () => {
         navigate('/products')
     }
 
-    const handelOnChange = () => {
+    const handelOnChange = (e) => {
+        let { checked, name, value } = e.target;
 
+        if (name === 'status') {
+            value = checked ? 'active' : 'inactive';
+        }
+
+        setForm({
+            ...form,
+            [name]: value
+        });
+    }
+
+    const handelOnSumbit = (e) => {
+        e.preventDefault()
+
+        //set data with dormData
+        const formData = new FormData();
+        for (const key in form) {
+            formData.append(key, form[key])
+        }
+
+        //append images 
+        images.length && [...images].map((img) => formData.append('images', img))
+
+        dispatch(postProductsAction(form))
+    }
+
+    const handelOnImageSelect = e => {
+        const { files } = e.target;
+        setImages(files);
     }
 
     const inputField = [
@@ -57,8 +88,8 @@ export const NewProduct = () => {
             required: true
         },
         {
-            name: 'price',
-            value: form.price,
+            name: 'salesPrice',
+            value: form.salesPrice,
             label: 'Price',
             type: 'number',
             placeholder: '343',
@@ -78,9 +109,9 @@ export const NewProduct = () => {
             placeholder: '100',
         },
         {
-            name: 'SalesEndDate',
+            name: 'salesEndDate',
             value: form.salesEndDate,
-            label: 'sales End Date',
+            label: 'Sales End Date',
             type: 'date',
             placeholder: '100',
         },
@@ -97,7 +128,8 @@ export const NewProduct = () => {
         {
             name: 'images',
             type: 'file',
-            accept: 'images'
+            accept: 'images',
+            multiple: true
         }
     ]
 
@@ -110,7 +142,7 @@ export const NewProduct = () => {
             <hr />
             <Container>
 
-                <Form className='p-3 shadow-lg product-card mb-2' >
+                <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} encType='multipart/form-data' >
                     <Form.Group className='mb-2'>
                         <Form.Check
                             name='status'
@@ -135,8 +167,11 @@ export const NewProduct = () => {
                     </Form.Group>
                     {inputField.map((item, i) =>
                         <CustomInput key={i} {...item}
-                            onChange={handelOnChange} />)
+                            onChange={item.name === 'images' ? handelOnImageSelect : handelOnChange} />)
                     }
+                    <Button variant='primary' type='submit'>
+                        Sumbit Product
+                    </Button>
                 </Form>
             </Container>
         </AdminLayout >

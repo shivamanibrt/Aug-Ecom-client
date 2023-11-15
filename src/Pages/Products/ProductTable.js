@@ -26,6 +26,7 @@ export const ProductTable = () => {
                         <th>Qty</th>
                         <th>Price</th>
                         <th>Sales Price</th>
+                        <th>Sales Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,8 +38,10 @@ export const ProductTable = () => {
                                 <td>{item.status}</td>
                                 <td>{item.name}</td>
                                 <td>{item.qty}</td>
+                                <td>{item.price}</td>
                                 <td>{item.salesPrice}</td>
-                                <td>{item.salesStartDate} - {item.salesEndDate}</td>
+                                <td>{item.salesStartDate && item.salesStartDate.substr(0, 10)}
+                                    {item.salesStartDate ? ' To' : '-'}    {item.salesEndDate && item.salesEndDate.substr(0, 10)}</td>
                                 <tr><Button variant='warning'>Edit</Button></tr>
                             </tr>
                         )

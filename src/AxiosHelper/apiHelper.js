@@ -184,3 +184,12 @@ export const fetchProducts = () => {
     }
     return apiProcessor(option)
 }
+export const postProduct = (data) => {
+    const option = {
+        method: 'post',
+        url: PEP,
+        isPrivate: true,
+        data
+    }
+    return apiProcessor(option)
+}
