@@ -18,7 +18,7 @@ const initialState = {
     salesPrice: null,
     salesStartDate: null,
     salesEndDate: null,
-    description: ''
+    description: '',
 }
 
 export const NewProduct = () => {
@@ -110,12 +110,17 @@ export const NewProduct = () => {
             <hr />
             <Container>
 
-                <Form className='p-2 shadow-lg product-card mb-2' >
+                <Form className='p-3 shadow-lg product-card mb-2' >
                     <Form.Group className='mb-2'>
-                        <Form.Check name='status' type='switch' label='status' />
-
+                        <Form.Check
+                            name='status'
+                            type='switch'
+                            label='status'
+                            checked={form.status === 'active'}
+                            onChange={handelOnChange}
+                        />
                     </Form.Group>
-                    <Form.Select name='catId' onChange={handelOnChange}>
+                    <Form.Select name='catId' onChange={handelOnChange} required>
                         <option value="">Select Parent Category</option>
                         {catageory.length > 0 &&
                             catageory.map((item, i) => (
@@ -129,7 +134,9 @@ export const NewProduct = () => {
 
                     </Form.Group>
                     {inputField.map((item, i) =>
-                        <CustomInput {...item} />)}
+                        <CustomInput key={i} {...item}
+                            onChange={handelOnChange} />)
+                    }
                 </Form>
             </Container>
         </AdminLayout >
