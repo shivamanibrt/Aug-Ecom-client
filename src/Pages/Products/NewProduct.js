@@ -60,8 +60,7 @@ export const NewProduct = () => {
         }
 
         //append images 
-        images.length && [...images].map((img) => formData.append('images', img))
-
+        images.length && [...images].map((img) => formData.append('images', img));
         dispatch(postProductsAction(form))
     }
 
@@ -106,14 +105,14 @@ export const NewProduct = () => {
             value: form.salesStartDate,
             label: 'Sales Start Date',
             type: 'date',
-            placeholder: '100',
+            placeholder: 'YYYY-MM-DD',
         },
         {
             name: 'salesEndDate',
             value: form.salesEndDate,
             label: 'Sales End Date',
             type: 'date',
-            placeholder: '100',
+            placeholder: 'YYYY-MM-DD',
         },
         {
             name: 'description',
@@ -128,10 +127,11 @@ export const NewProduct = () => {
         {
             name: 'images',
             type: 'file',
-            accept: 'images',
-            multiple: true
+            accept: 'image/*',
+            multiple: true,
+            label: 'Upload Images'
         }
-    ]
+    ];
 
     return (
         <AdminLayout>
@@ -142,7 +142,7 @@ export const NewProduct = () => {
             <hr />
             <Container>
 
-                <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} encType='multipart/form-data' >
+                <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} enctype='multipart/form-data' >
                     <Form.Group className='mb-2'>
                         <Form.Check
                             name='status'
