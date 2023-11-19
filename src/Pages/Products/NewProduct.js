@@ -16,9 +16,9 @@ const initialState = {
     sku: '',
     qty: '',
     price: 0,
-    salesEndDate: null,
     salesPrice: null,
     salesStartDate: null,
+    salesEndDate: null,
     description: '',
 }
 
@@ -39,34 +39,27 @@ export const NewProduct = () => {
 
     const handelOnChange = (e) => {
         let { checked, name, value } = e.target;
-
         if (name === 'status') {
             value = checked ? 'active' : 'inactive';
         }
-
-        setForm({
-            ...form,
-            [name]: value
-        });
-    }
-
-    const handelOnSumbit = (e) => {
-        e.preventDefault()
-
-        //set data with dormData
-        const formData = new FormData();
-        for (const key in form) {
-            formData.append(key, form[key])
-        }
-
-        //append images 
-        images.length && [...images].map((img) => formData.append('images', img));
-        dispatch(postProductsAction(form))
+        setForm({ ...form, [name]: value });
     }
 
     const handelOnImageSelect = e => {
         const { files } = e.target;
+        console.log(files)
         setImages(files);
+    }
+
+    const handelOnSumbit = (e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        for (const key in form) {
+            formData.append(key, form[key])
+        }
+        //append images 
+        images.length && [...images].map((img) => formData.append('images', img));
+        dispatch(postProductsAction(form))
     }
 
     const inputField = [
@@ -128,8 +121,7 @@ export const NewProduct = () => {
             name: 'images',
             type: 'file',
             accept: 'image/*',
-            multiple: true,
-            label: 'Upload Images'
+            multiple: true
         }
     ];
 
@@ -139,10 +131,9 @@ export const NewProduct = () => {
                 <div><BiArrowBack onClick={handelOnClick} />Back</div>
                 <h1>Add New Product</h1>
             </div>
-            <hr />
             <Container>
 
-                <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} enctype='multipart/form-data' >
+                <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} encType='multipart/form-data' >
                     <Form.Group className='mb-2'>
                         <Form.Check
                             name='status'
@@ -152,10 +143,11 @@ export const NewProduct = () => {
                             onChange={handelOnChange}
                         />
                     </Form.Group>
+
                     <Form.Select name='catId' onChange={handelOnChange} required>
                         <option value="">Select Parent Category</option>
                         {catageory.length > 0 &&
-                            catageory.map((item, i) => (
+                            catageory.map((item) => (
                                 item.parentId &&
                                 (
                                     <option value={item._id}>{item.name}</option>)
@@ -166,7 +158,7 @@ export const NewProduct = () => {
 
                     </Form.Group>
                     {inputField.map((item, i) =>
-                        <CustomInput key={i} {...item}
+                        <CustomInput {...item} key={i}
                             onChange={item.name === 'images' ? handelOnImageSelect : handelOnChange} />)
                     }
                     <Button variant='primary' type='submit'>
