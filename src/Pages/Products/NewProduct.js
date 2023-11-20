@@ -16,7 +16,7 @@ const initialState = {
     sku: '',
     qty: '',
     price: 0,
-    salesPrice: null,
+    salesPrice: 0,
     salesStartDate: null,
     salesEndDate: null,
     description: '',
@@ -47,7 +47,6 @@ export const NewProduct = () => {
 
     const handelOnImageSelect = e => {
         const { files } = e.target;
-        console.log(files)
         setImages(files);
     }
 
@@ -59,7 +58,7 @@ export const NewProduct = () => {
         }
         //append images 
         images.length && [...images].map((img) => formData.append('images', img));
-        dispatch(postProductsAction(form))
+        dispatch(postProductsAction(formData))
     }
 
     const inputField = [
@@ -85,6 +84,8 @@ export const NewProduct = () => {
             label: 'Price',
             type: 'number',
             placeholder: '343',
+            min: 1,
+            required: true
         },
         {
             name: 'qty',
@@ -133,7 +134,7 @@ export const NewProduct = () => {
             </div>
             <Container>
 
-                <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} encType='multipart/form-data' >
+                <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} enctype='multipart/form-data' >
                     <Form.Group className='mb-2'>
                         <Form.Check
                             name='status'
@@ -145,7 +146,7 @@ export const NewProduct = () => {
                     </Form.Group>
 
                     <Form.Select name='catId' onChange={handelOnChange} required>
-                        <option value="">Select Parent Category</option>
+                        <option value="">Select Category</option>
                         {catageory.length > 0 &&
                             catageory.map((item) => (
                                 item.parentId &&
