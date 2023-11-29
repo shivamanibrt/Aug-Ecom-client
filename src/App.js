@@ -16,6 +16,7 @@ import { Orders } from './Pages/Orders/Orders';
 import { Reviews } from './Pages/Reviews/Reviews';
 import { Settings } from './Pages/Settings/Settings';
 import { NewProduct } from './Pages/Products/NewProduct';
+import { ModifyPage } from './Pages/Products/ModifyPage';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path='register' element={<Register />} />
             <Route path='admin/verify-email' element={<EmaiVerification />} />
             <Route path='newProduct' element={<NewProduct />} />
+            <Route path="/modifyPage/:_id" element={<ModifyPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>

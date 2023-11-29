@@ -176,14 +176,16 @@ export const updatePaymentMethod = (data) => {
     };
     return apiProcessor(option)
 }
-export const fetchProducts = () => {
+export const fetchProducts = (_id) => {
+    const url = _id ? PEP + '/' + _id : PEP
     const option = {
         method: 'get',
-        url: PEP,
+        url,
         isPrivate: true,
     }
     return apiProcessor(option)
 }
+
 export const postProduct = (data) => {
     const option = {
         method: 'post',
