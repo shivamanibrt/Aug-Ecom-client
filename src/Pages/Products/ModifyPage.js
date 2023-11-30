@@ -3,7 +3,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { Button, Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleProductAciton } from '../../Redux/Products/productAction';
+import { deleteProductAction, getSingleProductAciton } from '../../Redux/Products/productAction';
 
 export const ModifyPage = () => {
     const { _id } = useParams();
@@ -20,7 +20,9 @@ export const ModifyPage = () => {
         if (window.confirm("are you sure you want to delete this item")) {
             const { thumbnail, images } = selectedProduct;
             const imgs = [thumbnail, ...images]
-            console.log([...new Set(imgs)])
+            console.log([...new Set(imgs)]);
+
+            deleteProductAction(_id, [...new Set(imgs)])
         }
     }
 

@@ -195,3 +195,12 @@ export const postProduct = (data) => {
     }
     return apiProcessor(option)
 }
+export const deleteProduct = (_id, data) => {
+    const option = {
+        method: 'delete',
+        url: PEP + '/' + _id,
+        isPrivate: true,
+        data
+    }
+    return apiProcessor(option)
+}
