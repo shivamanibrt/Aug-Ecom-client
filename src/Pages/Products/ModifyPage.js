@@ -4,6 +4,7 @@ import { Button, Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductAction, getSingleProductAciton } from '../../Redux/Products/productAction';
+import { EditProductForm } from './EditProductForm';
 
 export const ModifyPage = () => {
     const { _id } = useParams();
@@ -26,6 +27,7 @@ export const ModifyPage = () => {
         }
     }
 
+
     return (
         <Container>
             <Link to="/products">
@@ -35,7 +37,9 @@ export const ModifyPage = () => {
             </Link>
             <h1>Update Product</h1>
             <hr />
-            <div className=''>Edit form goes here</div>
+            <div className=''>
+                <EditProductForm />
+            </div>
 
             <div className='text-end py-3'>
                 <Button variant='danger' onClick={handelOnDelete}>Delete Button</Button>
