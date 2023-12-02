@@ -75,7 +75,7 @@ export const EditProductForm = () => {
             label: 'SKU',
             type: 'text',
             placeholder: 'Product Unique Code',
-            required: true
+            disabled: true
         },
         {
             name: 'salesPrice',
@@ -145,7 +145,11 @@ export const EditProductForm = () => {
                     catageory.map((item) => (
                         item.parentId &&
                         (
-                            <option value={item._id}>{item.name}</option>)
+                            <option value={item._id}
+                                selected={item._id === form.catId}>
+                                {item.name}
+                            </option>
+                        )
                     ))
                 }
             </Form.Select>
@@ -156,8 +160,13 @@ export const EditProductForm = () => {
                 <CustomInput {...item} key={i}
                     onChange={item.name === 'images' ? handelOnImageSelect : handelOnChange} />)
             }
+            <div className='my-5'>
+                {selectedProduct.images.length && selectedProduct.images.map((imgLink) => (
+                    <img src={imgLink} width='150px' alt="" />
+                ))}
+            </div>
             <Button variant='primary' type='submit'>
-                Sumbit Product
+                Update Product
             </Button>
         </Form>
 
