@@ -164,6 +164,7 @@ export const NewProduct = () => {
                         <CustomInput {...item} key={i}
                             onChange={item.name === 'images' ? handelOnImageSelect : handelOnChange} />)
                     }
+
                     <Button variant='primary' type='submit'>
                         Sumbit Product
                     </Button>

@@ -31,9 +31,8 @@ export const EditProductForm = () => {
     useEffect(() => {
         !catageory.length && dispatch(getAllCatagories());
         setForm(selectedProduct)
-        console.log(selectedProduct)
     }, [dispatch, catageory, selectedProduct]);
-
+    console.log(selectedProduct)
     const handelOnChange = (e) => {
         let { checked, name, value } = e.target;
         if (name === 'status') {
@@ -126,8 +125,6 @@ export const EditProductForm = () => {
     ];
 
     return (
-
-
         <Form className='p-3 shadow-lg product-card mb-2' onSubmit={handelOnSumbit} enctype='multipart/form-data' >
             <Form.Group className='mb-2'>
                 <Form.Check
@@ -160,10 +157,15 @@ export const EditProductForm = () => {
                 <CustomInput {...item} key={i}
                     onChange={item.name === 'images' ? handelOnImageSelect : handelOnChange} />)
             }
-            <div className='my-5'>
-                {selectedProduct.images.length && selectedProduct.images.map((imgLink) => (
-                    <img src={imgLink} width='150px' alt="" />
+            <div className='my-5 d-flex flex-wrap'>
+                {selectedProduct?.images && selectedProduct.images.map((imgLink, index) => (
+                    <div className='p-1'>
+                        <Form.Check type='radio' label='Use as thumbnail' value={imgLink} name='thumbnail' checked={imgLink === form.thumbnail} />
+                        <img key={index} src={process.env.REACT_APP_SERVER_ROOT + imgLink} width='150px' alt="" crossOrigin='anonymous' />
+                    </div>
                 ))}
+
+
             </div>
             <Button variant='primary' type='submit'>
                 Update Product
