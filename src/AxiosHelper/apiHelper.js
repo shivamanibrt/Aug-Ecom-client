@@ -176,6 +176,7 @@ export const updatePaymentMethod = (data) => {
     };
     return apiProcessor(option)
 }
+
 export const fetchProducts = (_id) => {
     const url = _id ? PEP + '/' + _id : PEP
     const option = {
@@ -195,6 +196,17 @@ export const postProduct = (data) => {
     }
     return apiProcessor(option)
 }
+
+export const updateProduct = (data) => {
+    const option = {
+        method: 'put',
+        url: PEP,
+        isPrivate: true,
+        data
+    }
+    return apiProcessor(option)
+}
+
 export const deleteProduct = (_id, data) => {
     const option = {
         method: 'delete',

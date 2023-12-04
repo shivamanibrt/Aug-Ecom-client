@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 import { CustomInput } from '../../Component/FormComponent/CustomInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCatagories } from '../../Redux/Category/PageCatageoryAction'
-import { postProductsAction } from '../../Redux/Products/productAction'
+import { updateProductsAction } from '../../Redux/Products/productAction'
 
 const initialState = {
     status: 'inactive',
@@ -22,7 +22,8 @@ const initialState = {
 
 export const EditProductForm = () => {
     const [form, setForm] = useState(initialState);
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState([]);
+    const [imageToDelete, setImageToDelete] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -47,19 +48,35 @@ export const EditProductForm = () => {
         setImages(files);
     }
 
+
     const handelOnSumbit = (e) => {
         e.preventDefault()
 
         const formData = new FormData();
-        for (const key in form) {
-            formData.append(key, form[key])
+        const { sku, slug, rating, createdAt, __v, ...rest } = form
+        for (const key in rest) {
+            formData.append(key, rest[key])
         }
         //append images 
-        images.length && [...images].map((img) => formData.append('images', img));
-        dispatch(postProductsAction(formData))
+        images.length && [...images].map((img) => formData.append('newImages', img));
+
+        //attache the image that need to delete
+        formData.append('imgToDelete', imageToDelete)
+
+        dispatch(updateProductsAction(formData))
     }
 
-
+    const handelOnImageDelete = (e) => {
+        const { checked, value } = e.target;
+        if (checked) {
+            setImageToDelete([
+                ...imageToDelete, value
+            ])
+        } else {
+            let b = imageToDelete.filter(img => img !== value)
+            setImageToDelete(b);
+        }
+    }
 
     const inputField = [
         {
@@ -164,7 +181,8 @@ export const EditProductForm = () => {
                     <div className='p-1'>
                         <Form.Check type='radio' label='Use as thumbnail' value={imgLink} name='thumbnail' checked={imgLink === form.thumbnail} onChange={handelOnChange} />
                         <img key={index} src={process.env.REACT_APP_SERVER_ROOT + imgLink} width='150px' alt="" crossOrigin='anonymous' />
-                        <Form.Check label='Delete' value={imgLink} />
+                        <hr />
+                        <Form.Check label='Delete' value={imgLink} onChange={handelOnImageDelete} />
                     </div>
                 ))}
 
