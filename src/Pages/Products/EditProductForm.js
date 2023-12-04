@@ -17,6 +17,7 @@ const initialState = {
     salesStartDate: null,
     salesEndDate: null,
     description: '',
+    thumbnail: ""
 }
 
 export const EditProductForm = () => {
@@ -32,7 +33,7 @@ export const EditProductForm = () => {
         !catageory.length && dispatch(getAllCatagories());
         setForm(selectedProduct)
     }, [dispatch, catageory, selectedProduct]);
-    console.log(selectedProduct)
+
     const handelOnChange = (e) => {
         let { checked, name, value } = e.target;
         if (name === 'status') {
@@ -56,8 +57,9 @@ export const EditProductForm = () => {
         //append images 
         images.length && [...images].map((img) => formData.append('images', img));
         dispatch(postProductsAction(formData))
-
     }
+
+
 
     const inputField = [
         {
@@ -160,11 +162,11 @@ export const EditProductForm = () => {
             <div className='my-5 d-flex flex-wrap'>
                 {selectedProduct?.images && selectedProduct.images.map((imgLink, index) => (
                     <div className='p-1'>
-                        <Form.Check type='radio' label='Use as thumbnail' value={imgLink} name='thumbnail' checked={imgLink === form.thumbnail} />
+                        <Form.Check type='radio' label='Use as thumbnail' value={imgLink} name='thumbnail' checked={imgLink === form.thumbnail} onChange={handelOnChange} />
                         <img key={index} src={process.env.REACT_APP_SERVER_ROOT + imgLink} width='150px' alt="" crossOrigin='anonymous' />
+                        <Form.Check label='Delete' value={imgLink} />
                     </div>
                 ))}
-
 
             </div>
             <Button variant='primary' type='submit'>

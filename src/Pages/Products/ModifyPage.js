@@ -37,13 +37,14 @@ export const ModifyPage = () => {
             </Link>
             <h1>Update Product</h1>
             <hr />
+            <div className='text-end py-3'>
+                <Button variant='danger' onClick={handelOnDelete}>Delete</Button>
+            </div>
             <div className=''>
                 <EditProductForm />
             </div>
 
-            <div className='text-end py-3'>
-                <Button variant='danger' onClick={handelOnDelete}>Delete Button</Button>
-            </div>
+
 
         </Container>
     );
