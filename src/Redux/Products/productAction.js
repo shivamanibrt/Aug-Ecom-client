@@ -27,7 +27,7 @@ export const updateProductsAction = (data) => async (dispatch) => {
 
     const { status, message } = await responsePending;
     toast[status](message)
-    status === 'success' && dispatch(getProductsAction())
+    status === 'success' && dispatch(getSingleProductAciton(data._id));
 }
 
 export const deleteProductAction = async (_id, data) => {

@@ -23,7 +23,7 @@ const initialState = {
 export const EditProductForm = () => {
     const [form, setForm] = useState(initialState);
     const [images, setImages] = useState([]);
-    const [imageToDelete, setImageToDelete] = useState([]);
+    const [imgToDelete, setImgToDelete] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -53,28 +53,29 @@ export const EditProductForm = () => {
         e.preventDefault()
 
         const formData = new FormData();
-        const { sku, slug, rating, createdAt, __v, ...rest } = form
+        const { sku, slug, rating, updatedAt, createdAt, __v, ...rest } = form
         for (const key in rest) {
             formData.append(key, rest[key])
         }
         //append images 
-        images.length && [...images].map((img) => formData.append('newImages', img));
+        [...images].map((img) => formData.append('newImages', img));
 
         //attache the image that need to delete
-        formData.append('imgToDelete', imageToDelete)
+        formData.append('imgToDelete', imgToDelete)
 
         dispatch(updateProductsAction(formData))
+        console.log(formData)
     }
 
     const handelOnImageDelete = (e) => {
         const { checked, value } = e.target;
         if (checked) {
-            setImageToDelete([
-                ...imageToDelete, value
+            setImgToDelete([
+                ...imgToDelete, value
             ])
         } else {
-            let b = imageToDelete.filter(img => img !== value)
-            setImageToDelete(b);
+            let b = imgToDelete.filter(img => img !== value)
+            setImgToDelete(b);
         }
     }
 
@@ -178,7 +179,7 @@ export const EditProductForm = () => {
             }
             <div className='my-5 d-flex flex-wrap'>
                 {selectedProduct?.images && selectedProduct.images.map((imgLink, index) => (
-                    <div className='p-1'>
+                    <div className='p-1' key={imgLink}>
                         <Form.Check type='radio' label='Use as thumbnail' value={imgLink} name='thumbnail' checked={imgLink === form.thumbnail} onChange={handelOnChange} />
                         <img key={index} src={process.env.REACT_APP_SERVER_ROOT + imgLink} width='150px' alt="" crossOrigin='anonymous' />
                         <hr />
