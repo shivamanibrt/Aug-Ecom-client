@@ -17,6 +17,7 @@ import { Reviews } from './Pages/Reviews/Reviews';
 import { Settings } from './Pages/Settings/Settings';
 import { NewProduct } from './Pages/Products/NewProduct';
 import { ModifyPage } from './Pages/Products/ModifyPage';
+import { AdminProfile } from './Pages/AdminProfile/AdminProfile';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path='orders' element={<Orders />} />
             <Route path='reviews' element={<Reviews />} />
             <Route path='settings' element={<Settings />} />
+            <Route path='adminProfile' element={<AdminProfile />} />
 
             {/* Public Pages */}
             <Route path='/' element={<Home />} />

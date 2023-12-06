@@ -6,6 +6,7 @@ import { AiOutlineComment } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { adminLogout } from '../../Redux/User/userAction';
+import { GrUserAdmin } from "react-icons/gr";
 
 export const Header = () => {
     const { adminUser } = useSelector((state) => state.admin);
@@ -39,6 +40,7 @@ export const Header = () => {
                                 <>
                                     <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                                     <Nav.Link as={Link} to="/login" onClick={handelOnLogout}>Logout</Nav.Link>
+                                    <Nav.Link as={Link} to="/adminProfile">Profile <GrUserAdmin /></Nav.Link>
                                 </>
                             ) : (
                                 <>
