@@ -87,6 +87,18 @@ export const getAdminUSer = (token) => {
     return apiProcessor(option);
 }
 
+export const updateAdminUSer = (data) => {
+    const option = {
+        method: 'put',
+        url: adminUserEp,
+        isPrivate: true,
+        data
+    }
+    return apiProcessor(option);
+}
+
+
+
 //fetch new accessJWT
 export const getNewAccessJWT = async () => {
     const option = {
