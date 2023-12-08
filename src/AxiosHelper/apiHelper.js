@@ -96,6 +96,15 @@ export const updateAdminUSer = (data) => {
     }
     return apiProcessor(option);
 }
+export const updateAdminPassword = (data) => {
+    const option = {
+        method: 'patch',
+        url: adminUserEp,
+        isPrivate: true,
+        data
+    }
+    return apiProcessor(option);
+}
 
 
 

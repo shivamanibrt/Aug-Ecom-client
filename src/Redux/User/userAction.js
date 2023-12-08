@@ -51,3 +51,10 @@ export const updateAdminProfileAction = (data) => async dispatch => {
         toast.error(error.message)
     }
 }
+export const updateAdminPassword = (data) => async (dispatch) => {
+    try {
+
+    } catch (error) {
+
+    }
+}
