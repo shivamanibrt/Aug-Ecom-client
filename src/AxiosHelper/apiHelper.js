@@ -87,7 +87,7 @@ export const getAdminUSer = (token) => {
     return apiProcessor(option);
 }
 
-export const updateAdminUSer = (data) => {
+export const updateAdminUser = (data) => {
     const option = {
         method: 'put',
         url: adminUserEp,

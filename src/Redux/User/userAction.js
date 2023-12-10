@@ -1,5 +1,5 @@
 import { toast } from "react-toastify"
-import { getAdminUSer, getNewAccessJWT, loginAdminUser, updateAdminUSer } from "../../AxiosHelper/apiHelper"
+import { getAdminUSer, getNewAccessJWT, loginAdminUser, updateAdminPassword, updateAdminUser } from "../../AxiosHelper/apiHelper"
 import { setAdminUser } from "./userSlice"
 
 export const loginUserAction = (data) => async (dispatch) => {
@@ -42,7 +42,7 @@ export const autoLogin = () => async (dispatch) => {
 
 export const updateAdminProfileAction = (data) => async dispatch => {
     try {
-        const promisePending = updateAdminUSer(data);
+        const promisePending = updateAdminUser(data);
         toast.promise(promisePending, { pending: 'Please wait' });
         const { status, message } = await promisePending;
         toast[status](message);
@@ -51,10 +51,13 @@ export const updateAdminProfileAction = (data) => async dispatch => {
         toast.error(error.message)
     }
 }
-export const updateAdminPassword = (data) => async (dispatch) => {
+export const updateAdminPasswordAction = async (data) => {
     try {
-
+        const promisePending = updateAdminPassword(data);
+        toast.promise(promisePending, { pending: 'Please wait ...' })
+        const { status, message } = await promisePending;
+        toast[status](message)
     } catch (error) {
-
+        toast.error(error.message)
     }
 }

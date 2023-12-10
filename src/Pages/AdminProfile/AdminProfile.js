@@ -3,7 +3,8 @@ import { AdminLayout } from '../../Layout/AdminLayout'
 import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { CustomInput } from '../../Component/FormComponent/CustomInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateAdminProfileAction } from '../../Redux/User/userAction';
+import { updateAdminPasswordAction, updateAdminProfileAction } from '../../Redux/User/userAction';
+
 
 export const AdminProfile = () => {
     const [form, setForm] = useState({});
@@ -75,18 +76,21 @@ export const AdminProfile = () => {
     const hanleOnPasswordUpdate = (e) => {
         const { name, value } = e.target;
         setPswrd({ ...pswrd, [name]: value });
-        setError('')
-        const { newPassword, confirmNewPassword, currentPassword } = pswrd;
-        if (name === 'confirmNewPassword') {
-            newPassword !== confirmNewPassword && setError("Password do not match");
+        setError('');
+
+        const { newPassword, confirmNewPassword } = pswrd;
+
+        // Move the validation checks outside the 'confirmNewPassword' condition
+        if (name === confirmNewPassword) {
+            confirmNewPassword !== newPassword && setError("Password do not match");
             newPassword.length < 6 && setError('Password must be 6 characters long');
             !/[a-z]/.test(newPassword) && setError('Password must contain at least one lowercase letter');
             !/[A-Z]/.test(newPassword) && setError('Password must contain at least one uppercase letter');
             !/[0-9]/.test(newPassword) && setError('Password must contain at least one digit');
-            !newPassword && setError("Password field must be provided");
+            setError("Password field must be provided");
         }
-
     }
+
 
     const handelOnProfileSubmit = (e) => {
         e.preventDefault();
@@ -96,10 +100,18 @@ export const AdminProfile = () => {
 
     const handelOnPasswordSubmit = (e) => {
         e.preventDefault();
-        const { confirmPassword, password } = pswrd;
+        const { currentPassword, confirmNewPassword, newPassword } = pswrd;
+        console.log(pswrd)
 
+        if (!currentPassword || newPassword !== confirmNewPassword) {
+            return alert('Either password field is empty or new password and confirm password do not match')
+        }
 
-
+        updateAdminPasswordAction({
+            currentPassword,
+            newPassword,
+            _id: adminUser._id
+        })
     }
 
     return (
@@ -120,14 +132,14 @@ export const AdminProfile = () => {
                 <hr />
                 <div className='mt-2 py-2' >
                     <h5>Update Password</h5>
-                    <Form onClick={handelOnPasswordSubmit}>
-                        <CustomInput type='password' onChange={hanleOnPasswordUpdate} name='currenPassword' required={true} label='Current Password' />
+                    <Form onSubmit={handelOnPasswordSubmit}>
+                        <CustomInput type='password' onChange={hanleOnPasswordUpdate} name='currentPassword' required={true} label='Current Password' />
                         <CustomInput type='password' onChange={hanleOnPasswordUpdate} name='newPassword' required={true} label='New Password' />
                         <Form.Text>Password must contain lowercase, uppercase, number and atlest 6 character long</Form.Text>
                         <CustomInput type='password' onChange={hanleOnPasswordUpdate} name='confirmNewPassword' required={true} label='Confirm Password' />
+                        <Button type='submit' variant='warning' disabled={error}>Update Password</Button>
                     </Form>
                     {error && <Alert variant='danger'>{error}</Alert>}
-                    <Button type='submit' variant='warning' disabled={error}>Update Password</Button>
                 </div>
 
             </Container>
