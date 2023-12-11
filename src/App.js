@@ -18,6 +18,7 @@ import { Settings } from './Pages/Settings/Settings';
 import { NewProduct } from './Pages/Products/NewProduct';
 import { ModifyPage } from './Pages/Products/ModifyPage';
 import { AdminProfile } from './Pages/AdminProfile/AdminProfile';
+import { ResetPassword } from './Pages/Login/ResetPassword';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path='admin/verify-email' element={<EmaiVerification />} />
             <Route path='newProduct' element={<NewProduct />} />
             <Route path="/modifyPage/:_id" element={<ModifyPage />} />
+            <Route path='reset-password' element={<ResetPassword />} />
           </Routes>
         </Layout>
       </BrowserRouter>

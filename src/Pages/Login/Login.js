@@ -67,6 +67,9 @@ export const Login = () => {
                         <p>Or Sign Up using</p>
                         <p className='text-secondary signUp-btn' >SIGN UP</p>
                     </div>
+                    <div className='text-end'>
+                        Forgot <a href='/reset-password'>password?</a>
+                    </div>
                 </Form>
             </Container>
         </div >
