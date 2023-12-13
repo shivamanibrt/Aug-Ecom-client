@@ -78,17 +78,18 @@ export const AdminProfile = () => {
         setPswrd({ ...pswrd, [name]: value });
         setError('');
 
-        const { newPassword, confirmNewPassword } = pswrd;
+        const { newPassword } = pswrd;
 
         // Move the validation checks outside the 'confirmNewPassword' condition
-        if (name === confirmNewPassword) {
-            confirmNewPassword !== newPassword && setError("Password do not match");
+        if (name === "confirmNewPassword") {
+            newPassword !== value && setError("Password and confirm password must match");
+            !newPassword && setError('Password must be provided');
             newPassword.length < 6 && setError('Password must be 6 characters long');
-            !/[a-z]/.test(newPassword) && setError('Password must contain at least one lowercase letter');
-            !/[A-Z]/.test(newPassword) && setError('Password must contain at least one uppercase letter');
-            !/[0-9]/.test(newPassword) && setError('Password must contain at least one digit');
-            setError("Password field must be provided");
+            !/[a-z]/.test(newPassword) && setError('Password must contain lowercase');
+            !/[A-Z]/.test(newPassword) && setError('Password must contain uppercase');
+            !/[0-9]/.test(newPassword) && setError('Password must contain number');
         }
+
     }
 
 

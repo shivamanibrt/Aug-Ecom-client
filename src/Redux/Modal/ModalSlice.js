@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     showModal: false,
-    productModal: false
+    productModal: false,
+
 }
 
 const modalSlice = createSlice({
@@ -14,7 +15,8 @@ const modalSlice = createSlice({
         },
         setProductModal: (state) => {
             state.productModal = !state.productModal
-        }
+        },
+
     }
 })
 
