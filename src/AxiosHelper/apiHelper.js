@@ -96,11 +96,21 @@ export const updateAdminUser = (data) => {
     }
     return apiProcessor(option);
 }
+
 export const updateAdminPassword = (data) => {
     const option = {
         method: 'patch',
         url: adminUserEp,
         isPrivate: true,
+        data
+    }
+    return apiProcessor(option);
+}
+
+export const resetAdminPassword = (data) => {
+    const option = {
+        method: 'post',
+        url: adminUserEp + '/request-password-reset-otp',
         data
     }
     return apiProcessor(option);
