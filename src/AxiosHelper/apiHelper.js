@@ -107,7 +107,8 @@ export const updateAdminPassword = (data) => {
     return apiProcessor(option);
 }
 
-export const resetAdminPassword = (data) => {
+//request OTP for update user password 
+export const requestOTPPassword = (data) => {
     const option = {
         method: 'post',
         url: adminUserEp + '/request-password-reset-otp',
@@ -116,7 +117,15 @@ export const resetAdminPassword = (data) => {
     return apiProcessor(option);
 }
 
-
+//reset user password
+export const resetAdminUserPassword = (data) => {
+    const option = {
+        method: 'patch',
+        url: adminUserEp + '/reset-password',
+        data
+    }
+    return apiProcessor(option);
+}
 
 //fetch new accessJWT
 export const getNewAccessJWT = async () => {

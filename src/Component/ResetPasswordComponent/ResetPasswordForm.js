@@ -25,7 +25,8 @@ export const ResetPasswordForm = ({ handelOnPasswordUpdate }) => {
     }
     const handelOnSubmit = (e) => {
         e.preventDefault()
-        handelOnPasswordUpdate(form)
+        const { confirmPassword, ...rest } = form
+        handelOnPasswordUpdate(rest)
     }
 
     const inputs = [
@@ -72,6 +73,9 @@ export const ResetPasswordForm = ({ handelOnPasswordUpdate }) => {
                 <Form.Group className='d-grid'>
                     <Button variant='warning' type='submit'>Update Password</Button>
                 </Form.Group>
+                <div className='text-end py-3'>
+                    <a href='/reset-password'>Request OTP</a>
+                </div>
             </Form>
         </div>
     )

@@ -1,25 +1,29 @@
 import React, { useState } from 'react'
 import { RequestOTP } from '../../Component/ResetPasswordComponent/RequestOTP'
 import { ResetPasswordForm } from '../../Component/ResetPasswordComponent/ResetPasswordForm'
-import { resetAdminPassword } from '../../AxiosHelper/apiHelper'
+import { requestOTPPassword, resetAdminUserPassword } from '../../AxiosHelper/apiHelper'
 import { Alert } from 'react-bootstrap'
 
 
 export const ResetPassword = () => {
-    const [passwordForm, setPasswordForm] = useState("password")
+    const [passwordForm, setPasswordForm] = useState("otp")
     const [res, setResp] = useState({});
+    const [userEmail, setUserEmail] = useState({})
 
     const handelOnOtpRequest = async (email) => {
         if (!email) {
             return alert('No email received')
         }
-        const response = await resetAdminPassword({ email });
+        setUserEmail(email)
+        const response = await requestOTPPassword({ email });
         setResp(response);
         response.status === 'success' && setPasswordForm('password')
     };
 
-    const handelOnPasswordUpdate = (data) => {
-        console.log(data)
+    const handelOnPasswordUpdate = async (data) => {
+        data.email = userEmail
+        const response = await resetAdminUserPassword(data)
+        setResp(response);
     }
 
     const form = {
@@ -34,7 +38,6 @@ export const ResetPassword = () => {
                     {res.message}
                 </Alert>
             )}
-
             {
                 form[passwordForm]
             }
