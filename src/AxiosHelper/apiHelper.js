@@ -5,6 +5,7 @@ const adminUserEp = rootUrl + '/admin-user'
 const catagoryEP = rootUrl + '/catagory'
 const PMEP = rootUrl + '/paymentMethod'
 const PEP = rootUrl + '/product'
+const ORDEREP = rootUrl + '/order'
 
 const apiProcessor = async ({ method, url, data, isPrivate, token }) => {
     try {
@@ -251,6 +252,16 @@ export const deleteProduct = (_id, data) => {
     const option = {
         method: 'delete',
         url: PEP + '/' + _id,
+        isPrivate: true,
+        data
+    }
+    return apiProcessor(option)
+}
+
+export const fetchOrders = (data) => {
+    const option = {
+        method: 'get',
+        url: ORDEREP,
         isPrivate: true,
         data
     }

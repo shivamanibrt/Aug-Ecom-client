@@ -4,6 +4,7 @@ import catageoryReducer from './Redux/Category/CatageorySlice'
 import modalReducer from './Redux/Modal/ModalSlice'
 import paymentMethodReducer from './Redux/PaymentMethod/paymentMethodSlice'
 import productReducer from './Redux/Products/productSlice'
+import orderReducer from './Redux/Orders/OrderSlice'
 
 export const store = configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
         modal: modalReducer,
         paymentMethod: paymentMethodReducer,
         products: productReducer,
+        orders: orderReducer
     },
 })

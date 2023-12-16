@@ -3,6 +3,7 @@ import { AdminLayout } from '../../Layout/AdminLayout'
 import { OrdersTable } from './OrdersTable'
 
 export const Orders = () => {
+
     return (
         <AdminLayout>
             <div className='p-4 text-secondary'>
