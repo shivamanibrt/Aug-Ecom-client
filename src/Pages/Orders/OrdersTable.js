@@ -4,9 +4,10 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders } from '../../Redux/Orders/OrderAction';
-import { setOrderModal, setShowModal } from '../../Redux/Modal/ModalSlice';
+import { setShowModal } from '../../Redux/Modal/ModalSlice';
 import { OrderDetails } from './OrderDetails';
 import { setSlectedOder } from '../../Redux/Orders/OrderSlice';
+import { Link } from 'react-router-dom';
 
 export const OrdersTable = () => {
     const dispatch = useDispatch()
@@ -16,11 +17,6 @@ export const OrdersTable = () => {
         dispatch(getOrders(),
             [dispatch])
     })
-
-    const handelOnClick = (item) => {
-        dispatch(setShowModal(true))
-        dispatch(setSlectedOder(item))
-    }
 
     return (
         <div>
@@ -46,9 +42,10 @@ export const OrdersTable = () => {
                                     <td>{item?.buyer?.fName} {item?.buyer?.fName}</td>
                                     <td>{item?.totalAmount}</td>
                                     <td>{item?.paymentInfo?.status}</td>
-                                    <td>
-                                        <Button variane='info' onClick={() => handelOnClick(item?._id)}>View Details
+                                    <td><Link to={`/orders/${item?._id}`}>
+                                        <Button variane='info'>View Details
                                         </Button>
+                                    </Link>
                                     </td>
                                 </tr>
                             ))

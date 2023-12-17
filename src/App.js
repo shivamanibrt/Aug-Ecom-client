@@ -19,6 +19,7 @@ import { NewProduct } from './Pages/Products/NewProduct';
 import { ModifyPage } from './Pages/Products/ModifyPage';
 import { AdminProfile } from './Pages/AdminProfile/AdminProfile';
 import { ResetPassword } from './Pages/Login/ResetPassword';
+import { OrderDetails } from './Pages/Orders/OrderDetails';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path='paymentMethods' element={<PaymentMethods />} />
             <Route path='users' element={<Users />} />
             <Route path='orders' element={<Orders />} />
+            <Route path='orders/:_id' element={<OrderDetails />} />
             <Route path='reviews' element={<Reviews />} />
             <Route path='settings' element={<Settings />} />
             <Route path='adminProfile' element={<AdminProfile />} />

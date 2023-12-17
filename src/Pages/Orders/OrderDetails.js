@@ -1,16 +1,17 @@
 import React from 'react'
-import { CustomModal } from '../../Component/ShowModal/CustomModal'
-import { useSelector } from 'react-redux'
+import { Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { OrderEditFor } from './OrderEditFor'
 
 export const OrderDetails = () => {
-    const { orderModal } = useSelector(state => state.orders)
-    const { selectedOder } = useSelector(state => state.orders)
-
     return (
-        <CustomModal heading='Order details'>
-            <div>
-                <p>status: {selectedOder}</p>
-            </div>
-        </CustomModal>
+        <Container>
+            <Link to='/orders' className='text-decoration-none text-secondary'>
+                &lt; Back
+            </Link>
+            <h1 className='py-3'>Order Details</h1>
+            <hr />
+            <OrderEditFor />
+        </Container>
     )
 }
