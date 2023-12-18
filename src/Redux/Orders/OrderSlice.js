@@ -12,7 +12,7 @@ const orderSlice = createSlice({
         setOrders: (state, { payload }) => {
             state.orders = payload
         },
-        setSlectedOrder: (state, { payload }) => {
+        setSlectedOrder: (state, { payload = {} }) => {
             state.selectedOrder = payload
         },
 

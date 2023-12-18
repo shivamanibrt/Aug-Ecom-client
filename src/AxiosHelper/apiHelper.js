@@ -258,12 +258,12 @@ export const deleteProduct = (_id, data) => {
     return apiProcessor(option)
 }
 
-export const fetchOrders = (data) => {
+export const fetchOrders = (_id) => {
+    const url = _id ? ORDEREP + '/' + _id : ORDEREP
     const option = {
         method: 'get',
-        url: ORDEREP,
+        url,
         isPrivate: true,
-        data
     }
     return apiProcessor(option)
 }

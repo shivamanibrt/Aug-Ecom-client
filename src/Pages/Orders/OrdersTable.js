@@ -4,9 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders } from '../../Redux/Orders/OrderAction';
-import { setShowModal } from '../../Redux/Modal/ModalSlice';
-import { OrderDetails } from './OrderDetails';
-import { setSlectedOder } from '../../Redux/Orders/OrderSlice';
 import { Link } from 'react-router-dom';
 
 export const OrdersTable = () => {
@@ -14,13 +11,11 @@ export const OrdersTable = () => {
     const { orders } = useSelector(state => state.orders)
 
     useEffect(() => {
-        dispatch(getOrders(),
-            [dispatch])
-    })
+        dispatch(getOrders())
+    }, [dispatch])
 
     return (
         <div>
-            <OrderDetails />
             <Container>
                 <Table striped bordered hover>
                     <thead>
